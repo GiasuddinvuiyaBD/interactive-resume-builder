@@ -12,6 +12,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+
 # Ensuser that users get up to date data
 @app.after_request
 def after_request(response):
@@ -24,7 +25,17 @@ def after_request(response):
 
 @app.route("/")
 def home():
-
     return render_template("layout.html")
+
+
+@app.route("/login", methods = ["GET", "POST"])
+def login():
+    return render_template("login.html")
+
+
+@app.route("/register", methods = ["GET","POST"])
+def register():
+    return render_template("register.html")
+
 
 
