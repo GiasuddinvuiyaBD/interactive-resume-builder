@@ -13,6 +13,7 @@ Session(app)
 
 
 
+
 # Ensuser that users get up to date data
 @app.after_request
 def after_request(response):
@@ -35,6 +36,15 @@ def login():
 
 @app.route("/register", methods = ["GET","POST"])
 def register():
+
+    if request.method == "post" :
+        name = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirmPass = request.form.get("confirmation")
+
+        print(name,email,password, confirmPass)
+
     return render_template("register.html")
 
 
