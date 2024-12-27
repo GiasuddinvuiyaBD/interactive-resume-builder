@@ -5,7 +5,7 @@ from flask import Flask, flash, redirect, render_template, session, request
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology
-
+from sqlite3 import IntegrityError
 # configure application
 app = Flask(__name__)
 
@@ -89,9 +89,9 @@ def register():
                 return redirect("/login")
             except ValueError:
                 errors["email"] = "Email already exists!"
-                errors["password"] = "Password already exist!"
+                errors["password"] = "password already exists!"
                 return render_template("register.html", errors=errors)
-                
+            
     return render_template("register.html", errors=errors)
 
 
