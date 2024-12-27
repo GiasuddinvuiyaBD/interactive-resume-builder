@@ -1,3 +1,5 @@
 SQL
 Flask 
 Flask-Session
+pytz
+requests

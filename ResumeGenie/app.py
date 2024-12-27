@@ -1,7 +1,10 @@
 
+import re 
 from cs50 import SQL 
 from flask import Flask, redirect, render_template, session, request
 from flask_session import Session
+from werkzeug.security import check_password_hash, generate_password_hash
+from helpers import apology
 
 # configure application
 app = Flask(__name__)
@@ -37,15 +40,53 @@ def login():
 @app.route("/register", methods = ["GET","POST"])
 def register():
 
-    if request.method == "post" :
-        name = request.form.get("username")
-        email = request.form.get("email")
-        password = request.form.get("password")
-        confirmPass = request.form.get("confirmation")
+    errors = {}  # Dictionary to store error messages
 
-        print(name,email,password, confirmPass)
+    if request.method == "POST" :
+        name = request.form.get("username").strip()
+        email = request.form.get("email").strip()
+        password = request.form.get("password").strip()
+        confirmPass = request.form.get("confirmation").strip()
 
-    return render_template("register.html")
+        if not name:
+          errors["name"] = "User name is required."
+        
+        # email validation
+        if not email:
+            errors["email"] = "Please fill out the email field"
+        else:
+            validEmailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            if not re.match(validEmailPattern, email):
+                errors["email"] = "Invalid email format"
+        
+        # password validation
+        if not password:
+            errors["password"] = "Please fill out the password field"
+        elif len(password) < 4:
+            errors["password"] = "Password should be min 4 char"
+        elif len(password) > 16:
+            errors["password"] = "Password should be max 16 char"
+        # i will work with making strong password part or generate a strong password
+
+        # confirm password
+        if not confirmPass:
+            errors["confirmation"] = "Opps! fill out the confirm password"
+        elif password != confirmPass:
+            errors["confirmation"] = "try again your password is not match"
+
+        
+        # hash the password
+        if not errors:
+            password_hash = generate_password_hash(password)
+             # Save user data into the database here
+            print(f"Name: {name}, Email: {email}, Password Hash: {password_hash}")
+            return redirect("/login") 
+
+
+    return render_template("register.html", errors=errors)
 
 
 
+# Enable debug mode
+if __name__ == "__main__":
+    app.run(debug=True)

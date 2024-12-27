@@ -9,15 +9,31 @@
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
         </div>
+        {% if errors.get('name') %}
+        <div class="error">{{ errors['name'] }}</div>
+        {% endif %}
+
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email " type="email">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email " type="text">
         </div>
+        {% if errors.get('email') %}
+        <div class="error">{{ errors['email'] }}</div>
+        {% endif %}
+
         <div class="mb-3">
             <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
         </div>
+        {% if errors.get('password') %}
+        <div class="error">{{ errors['password'] }}</div>
+        {% endif %}
+
         <div class="mb-3">
             <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirmation" type="password">
         </div>
+        {% if errors.get('confirmation') %}
+        <div class="error">{{ errors['confirmation'] }}</div>
+        {% endif %}
+
         <button class="btn btn-primary" type="submit">Register</button>
     </form>
 {% endblock %}
