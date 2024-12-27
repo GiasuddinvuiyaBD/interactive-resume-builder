@@ -1,7 +1,7 @@
 
 import re 
 from cs50 import SQL 
-from flask import Flask, redirect, render_template, session, request
+from flask import Flask, flash, redirect, render_template, session, request
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology
@@ -15,6 +15,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+# configure cs50 library to join the sqlite database
+db = SQL("sqlite:///users_and_resumes.db")
 
 
 # Ensuser that users get up to date data
@@ -75,15 +77,21 @@ def register():
         elif not errors and password != confirmPass:
             errors["confirmation"] = "Try again; your passwords do not match"
 
-        
+
         # hash the password
         if not errors:
             password_hash = generate_password_hash(password)
-             # Save user data into the database here
-            print(f"Name: {name}, Email: {email}, Password Hash: {password_hash}")
-            return redirect("/login") 
-
-
+            # Save users data into the database here
+            try:
+                db.execute("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)", name, email, password_hash)         
+                # Redirect to login page
+                flash("Registered successfully! Please log in.")
+                return redirect("/login")
+            except ValueError:
+                errors["email"] = "Email already exists!"
+                errors["password"] = "Password already exist!"
+                return render_template("register.html", errors=errors)
+                
     return render_template("register.html", errors=errors)
 
 
