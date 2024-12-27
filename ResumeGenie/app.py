@@ -36,7 +36,38 @@ def home():
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
+    
+    if request.method == "POST":
+        email = request.form.get("email").strip()
+        password = request.form.get("password").strip()
+
+        user = db.execute("SELECT * FROM users WHERE email = ?", email)
+        print(user)
+
+        if len(user) != 1: 
+            flash("Invalid email or password")
+            return redirect("/login")
+        
+        if not check_password_hash(user[0]["password_hash"], password):
+            flash("Invalid email or password")
+            return redirect("/login")
+
+        # if password match then log the user in
+        session["user_id"] = user[0]["id"]
+        flash("login successful")
+        return redirect("/")
+
     return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/login")
 
 
 @app.route("/register", methods = ["GET","POST"])
@@ -89,7 +120,6 @@ def register():
                 return redirect("/login")
             except ValueError:
                 errors["email"] = "Email already exists!"
-                errors["password"] = "password already exists!"
                 return render_template("register.html", errors=errors)
             
     return render_template("register.html", errors=errors)
