@@ -40,7 +40,7 @@ def login():
 @app.route("/register", methods = ["GET","POST"])
 def register():
 
-    errors = {}  # Dictionary to store error messages
+    errors = {}  # Dictionary to store error messages. 
 
     if request.method == "POST" :
         name = request.form.get("username").strip()
@@ -48,31 +48,32 @@ def register():
         password = request.form.get("password").strip()
         confirmPass = request.form.get("confirmation").strip()
 
+
+        # Validate name
         if not name:
-          errors["name"] = "User name is required."
-        
-        # email validation
-        if not email:
+            errors["name"] = "User name is required."
+
+        # Validate email
+        elif not email:
             errors["email"] = "Please fill out the email field"
         else:
             validEmailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
             if not re.match(validEmailPattern, email):
                 errors["email"] = "Invalid email format"
-        
-        # password validation
-        if not password:
-            errors["password"] = "Please fill out the password field"
-        elif len(password) < 4:
-            errors["password"] = "Password should be min 4 char"
-        elif len(password) > 16:
-            errors["password"] = "Password should be max 16 char"
-        # i will work with making strong password part or generate a strong password
 
-        # confirm password
-        if not confirmPass:
+        # Validate password
+        if not errors and not password:
+            errors["password"] = "Please fill out the password field"
+        elif not errors and len(password) < 4:
+            errors["password"] = "Password should be min 4 characters"
+        elif not errors and len(password) > 16:
+            errors["password"] = "Password should be max 16 characters"
+
+        # Validate confirm password
+        elif not errors and not confirmPass:
             errors["confirmation"] = "Opps! fill out the confirm password"
-        elif password != confirmPass:
-            errors["confirmation"] = "try again your password is not match"
+        elif not errors and password != confirmPass:
+            errors["confirmation"] = "Try again; your passwords do not match"
 
         
         # hash the password
