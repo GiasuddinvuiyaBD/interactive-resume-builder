@@ -8,3 +8,65 @@ body{
     color: red;
 }
 
+
+
+/* General Navbar Styles */
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Styles */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+}
+
+.navbar-brand:hover {
+    color: #6a11cb;
+    -webkit-text-fill-color: unset;
+}
+
+/* Navigation Link Styles */
+.nav-link {
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #2575fc;
+    text-decoration: underline;
+}
+
+/* Right-side Buttons (Login/Register) */
+.nav-item .nav-link {
+    margin: 0 5px;
+    padding: 5px 15px;
+    color: #2575fc;
+    border: 2px solid #2575fc;
+    border-radius: 18px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-item .nav-link:hover {
+    background: #2575fc;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+}
+
