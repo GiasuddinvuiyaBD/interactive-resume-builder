@@ -96,7 +96,7 @@ body{
 
 /* -------- Registration From Design Start here --------- */
 
-.register-form{
+.register-form, .resume-form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -148,6 +148,12 @@ body{
 }
 
 
+/* Resume form */
+#resume-label{
+    display:flex;
+    text-align: left;
+    color: gray;
+}
 
 
 /* Responsive Adjustments */

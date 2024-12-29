@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    form
+{% endblock %}
+
+{% block main %}
+<div class="resume-form">
+    <div class="form-container">
+
+        <h2 class="form-heading">Create Resume</h2>
+
+        <form action="/resume" method="post">
+            <div class="form-group mb-5">
+                <input autocomplete="off" id="title" autofocus class="form-control" name="title" placeholder="Title" type="text">
+                <small class="form-text text-muted"></small>
+            </div>
+            <label id="resume-label">Personal Info:</label>
+            <div class="form-row">
+                <!-- Name and Email Inline -->
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input autocomplete="off" id="email" class="form-control" name="email" placeholder="Email: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <!-- phone country  and city Inline -->
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="country" name="country" placeholder="Country: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="city" name="city" placeholder="City: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <!-- linkedin and protfolio -->
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="protfolio" name="protfolio" placeholder="Protfolio: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <!-- skills  -->
+            <label id="resume-label">Education:</label>
+             <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="degree" name="degree" placeholder="Degree: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+             </div>
+             <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+             </div>
+             <!-- work experience -->
+            <label id="resume-label">Work Experience: </label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="role" name="role" placeholder="Role: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="company" name="company" placeholder="Company: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <!-- skills -->
+            <label id="resume-label">Skills: </label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="skill" name="skill" placeholder="Write you skills " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" id="resemeBtn">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

@@ -33,6 +33,10 @@ def after_request(response):
 def home():
     return render_template("home.html")
 
+@app.route("/form")
+def form():
+    return  render_template("form.html")
+
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
