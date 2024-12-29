@@ -1,1 +1,1 @@
-CS50 Final project
+CS50 Final project, ResumeGenie 
