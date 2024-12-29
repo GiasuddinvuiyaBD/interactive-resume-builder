@@ -13,7 +13,8 @@ body{
 /* General Navbar Styles */
 .navbar {
     font-family: 'Poppins', sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 4px 6px rgba(80, 80, 80, 0.1);
 }
 
 /* Brand Styles */
@@ -59,6 +60,39 @@ body{
     box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
 }
 
+
+
+/* main */
+.fw-bold{
+    font-style: normal;
+    font-size: 80px;
+    line-height: 90px;
+    text-align: center;
+}
+
+
+
+
+/* Gradient text effect */
+.text-gradient {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Button styling for extra customization */
+.btn-primary {
+    background-color: #5b34c1; /* Custom purple shade */
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #3b228a; /* Darker shade on hover */
+    transform: scale(1.05);
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .navbar-brand {
@@ -69,4 +103,3 @@ body{
         font-size: 0.9rem;
     }
 }
-
