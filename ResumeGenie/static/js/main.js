@@ -1,8 +1,9 @@
 let registrationBtn = document.querySelector("#submitBtn")
-// let loginBtn = document.querySelector("#loginBtn")
+let loginBtn = document.querySelector("#loginBtn")
 
 
-registrationBtn.addEventListener('click', (evt) => {
+if(registrationBtn){
+registrationBtn.addEventListener("click", (evt) => {
 
     // Select input fields
     let userNameField = document.querySelector("#name");
@@ -99,3 +100,35 @@ registrationBtn.addEventListener('click', (evt) => {
         evt.preventDefault()
     }
 })
+}
+
+
+if(loginBtn){
+loginBtn.addEventListener('click', (evt) => {
+    
+    let emailField = document.querySelector("#email")
+    let passwordField = document.querySelector("#password")
+
+    let email = emailField.value.trim()
+    let password = passwordField.value.trim()
+
+    
+    let errors = false;
+
+    if(!email){
+        emailField.classList.add("is-invalid")
+        errors = true
+    } else {
+        emailField.classList.remove("is-invalid")
+    }
+
+    if(!password){
+        passwordField.classList.add("is-invalid")
+        errors = true
+    }else{
+        passwordField.classList.remove("is-invalid")
+    }
+
+    if(errors) evt.preventDefault();
+})
+}
