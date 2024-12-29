@@ -1,4 +1,5 @@
 let registrationBtn = document.querySelector("#submitBtn")
+// let loginBtn = document.querySelector("#loginBtn")
 
 
 registrationBtn.addEventListener('click', (evt) => {
@@ -27,47 +28,62 @@ registrationBtn.addEventListener('click', (evt) => {
 
     if(!userName){
         nameError.textContent = "User name is required."
-        userName.style.border = "1px solid green"
+        userNameField.classList.add("is-invalid")
         error = true;
     } else {
+        userNameField.classList.remove("is-invalid")
         nameError.textContent = ""
     }
 
     // email validation
     if(!email){
         emailError.textContent = "Email address is required"
-        error = true
-    } else if(!validEmail){
-        emailError.textContent = "Invalid email format"
+        emailField.classList.add("is-invalid")
         error = true
     } else {
-        email.textContent = "" 
+        emailField.classList.remove("is-invalid")
+        emailError.textContent = "" 
+    }
+
+    if(!validEmail){
+        emailError.textContent = "Invalid email format"
+        emailField.classList.add("is-invalid")
+        error = true
+    } else {
+        emailField.classList.remove("is-invalid")
+        emailError.textContent = "" 
     }
 
     // password validation
     if(!password){
         passwordError.textContent = "Password is required field"
+        passwordField.classList.add("is-invalid")
         error = true;
     } else if(password.length < 4){
         passwordError.innerHTML = `
         Password should be at least 4 characters. <br/>
         <a href="#" id="generate-password" class="text-primary">Generate a strong password</a>
     `;
+        passwordField.classList.add("is-invalid")
         error = true;
     } else if(password.length > 16){
         passwordError.innerHTML = `
         Password should be max 16 characters. <br/>
         <a href="#" id="generate-password" class="text-primary">Generate a strong password</a>
     `;
+        passwordField.classList.add("is-invalid")
         error = true;
     } else {
+        passwordField.classList.remove("is-invalid")
         passwordError.textContent = ""
     }
 
     if(!confirmation){
         confirmationError.textContent = "Confiramtion is required field"
+        confirmationField.classList.add("is-invalid")
         error = true;
     } else {
+        confirmationField.classList.remove("is-invalid")
         confirmationError.textContent = ""
     }
 
@@ -75,6 +91,7 @@ registrationBtn.addEventListener('click', (evt) => {
         confirmationError.textContent = "Opps! your password is not match"
         error = true
     } else {
+        confirmationField.classList.remove("is-invalid")
         confirmationError.textContent = ""
     }
 

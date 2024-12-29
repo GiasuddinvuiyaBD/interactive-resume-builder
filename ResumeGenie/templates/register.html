@@ -5,39 +5,62 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/register" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" id="name" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
-        </div>
-        <feedback class="name-error error"></feedback>
-        {% if errors.get('name') %}
-        <div class="error">{{ errors['name'] }}</div>
-        {% endif %}
-
-        <div class="mb-3">
-            <input autocomplete="off" id="email" autofocus class="form-control mx-auto w-auto" name="email" placeholder="Email " type="text">
-        </div>
-        <feedback class="email-error error"></feedback>
-        {% if errors.get('email') %}
-        <div class="error">{{ errors['email'] }}</div>
-        {% endif %}
-
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
-        </div>
-        <feedback class="password-error error"></feedback>
-        {% if errors.get('password') %}
-        <div class="error">{{ errors['password'] }}</div>
-        {% endif %}
-
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirmation" type="password">
-        </div>
-        <feedback class="confirmation-error error"></feedback>
-        {% if errors.get('confirmation') %}
-        <div class="error">{{ errors['confirmation'] }}</div>
-        {% endif %}
-
-        <button class="btn btn-primary" type="submit" id="submitBtn">Register</button>
-    </form>
+<div class="register-form">
+    <div class="form-container">
+        <h2 class="form-heading">ResumeGenie</h2>
+        <form action="/register" method="post">
+            <div class="form-row">
+                <!-- Name and Email Inline -->
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input autocomplete="off" id="name" autofocus class="form-control" name="username" placeholder="Username" type="text">
+                        <small class="name-error error form-text text-muted"></small>
+                        {% if errors.get('name') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['name'] }}
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input autocomplete="off" id="email" class="form-control" name="email" placeholder="Email" type="text">
+                        <small class="email-error error form-text text-muted"></small>
+                        {% if errors.get('email') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['email'] }}
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <!-- Password and Confirmation Inline -->
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                        <small class="password-error error form-text text-muted"></small>
+                        {% if errors.get('password') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['password'] }}
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="confirmation" name="confirmation" placeholder="Confirmation" type="password">
+                        <small class="confirmation-error error form-text text-muted"></small>
+                        {% if errors.get('confirmation') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['confirmation'] }}
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" id="submitBtn">Register</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
