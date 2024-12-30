@@ -1,5 +1,14 @@
+
 let registrationBtn = document.querySelector("#submitBtn")
 let loginBtn = document.querySelector("#loginBtn")
+let addEductionFieldBtn = document.querySelector("#educationBtn")
+let addExperienceBtn = document.querySelector("#experienceBtn")
+let addSkillBtn = document.querySelector("#skillsBtn")
+
+
+let educationSection = document.querySelector(".education-section");
+let experience = document.querySelector(".work-experience-section")
+let skills = document.querySelector(".skill-section")
 
 
 if(registrationBtn){
@@ -132,3 +141,97 @@ loginBtn.addEventListener('click', (evt) => {
     if(errors) evt.preventDefault();
 })
 }
+
+// add education field
+addEductionFieldBtn.addEventListener('click', (evt) => {
+    
+    evt.preventDefault()
+    const newEducation = `
+        <div class="education-item row mb-3">
+            <div class="col">
+                <div class="form-group mb-4">
+                    <input class="form-control" id="degree" name="[]" placeholder="Degree: " type="text">
+                    <small class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group mb-4">
+                    <input class="form-control" id="institution" name="[]" placeholder="Institution: " type="text">
+                    <small class="form-text text-muted"></small>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group mb-4">
+                    <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
+                    <small class="form-text text-muted"></small>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-danger mb-4 remove-btn">Remove</button> 
+        </div>`;
+    educationSection.insertAdjacentHTML("beforeend", newEducation);
+})
+
+addExperienceBtn.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    
+    let newExperience = `
+            <div class="education-item form-row mb-3">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="role" name="[]" placeholder="Role: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="company" name="[]" placeholder="Company: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-danger mb-4 remove-btn">Remove</button> 
+            </div>
+    `
+    experience.insertAdjacentHTML("beforeend", newExperience)
+
+})
+
+addSkillBtn.addEventListener('click', (evt) => {
+    let newSkills = `
+        <div class="skill-item form-row mb-3">
+            <div class="col">
+                <div class="form-group mb-5">
+                    <input class="form-control" id="skill" name="skill" placeholder="Write you skills " type="text">
+                    <small class="form-text text-muted"></small>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-danger mb-4 remove-btn">Remove</button> 
+        </div>
+    `
+    skills.insertAdjacentHTML('beforeend', newSkills)
+})
+ 
+// Event delegation for the remove functionality
+educationSection.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("remove-btn")) {
+        evt.target.parentElement.remove(); 
+    }
+});
+
+experience.addEventListener("click", (evt) =>{
+    if (evt.target.classList.contains("remove-btn")) {
+        evt.target.parentElement.remove(); 
+    }
+})
+
+skills.addEventListener("click", (evt) =>{
+    if (evt.target.classList.contains("remove-btn")) {
+        evt.target.parentElement.remove(); 
+    }
+})
+

@@ -11,7 +11,8 @@
         <h2 class="form-heading">Create Resume</h2>
 
         <form action="/resume" method="post">
-            <div class="form-group mb-5">
+            <div class="personal-info-section">
+            <div class="form-group mb-4">
                 <input autocomplete="off" id="title" autofocus class="form-control" name="title" placeholder="Title" type="text">
                 <small class="form-text text-muted"></small>
             </div>
@@ -19,13 +20,13 @@
             <div class="form-row">
                 <!-- Name and Email Inline -->
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input autocomplete="off" id="email" class="form-control" name="email" placeholder="Email: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
@@ -34,19 +35,19 @@
             <div class="form-row">
                 <!-- phone country  and city Inline -->
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input class="form-control" id="country" name="country" placeholder="Country: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input class="form-control" id="city" name="city" placeholder="City: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
@@ -55,73 +56,85 @@
             <!-- linkedin and protfolio -->
             <div class="form-row">
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group mb-5">
+                    <div class="form-group mb-4">
                         <input class="form-control" id="protfolio" name="protfolio" placeholder="Protfolio: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- skills  -->
+        <div class="education-section">
             <label id="resume-label">Education:</label>
-             <div class="form-row">
+            <div class="form-row">
                 <div class="col">
-                    <div class="form-group mb-5">
-                        <input class="form-control" id="degree" name="degree" placeholder="Degree: " type="text">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="degree" name="[]" placeholder="Degree: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="form-group mb-5">
-                        <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text">
-                        <small class="form-text text-muted"></small>
-                    </div>
-                </div>
-             </div>
-             <div class="form-row">
-                <div class="col">
-                    <div class="form-group mb-5">
-                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="institution" name="[]" placeholder="Institution: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
              </div>
+             <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+             </div>
+             <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="educationBtn">Add More</button>
+            </div>
+
              <!-- work experience -->
+            <div class="work-experience-section">
             <label id="resume-label">Work Experience: </label>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="role" name="role" placeholder="Role: " type="text">
+                        <input class="form-control" id="role" name="[]" placeholder="Role: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="company" name="company" placeholder="Company: " type="text">
+                        <input class="form-control" id="company" name="[]" placeholder="Company: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
+                        <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
             </div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="experienceBtn">Add More</button>
+            </div>
+
             <!-- skills -->
+            <div class="skill-section">
             <label id="resume-label">Skills: </label>
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="skill" name="skill" placeholder="Write you skills " type="text">
+                        <input class="form-control" id="skill" name="[]" placeholder="Write you skills " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="skillsBtn">Add More Skills</button>
             </div>
             <button class="btn btn-primary btn-block" type="submit" id="resemeBtn">Create</button>
         </form>
