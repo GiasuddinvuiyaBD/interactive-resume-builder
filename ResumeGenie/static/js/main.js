@@ -143,9 +143,11 @@ loginBtn.addEventListener('click', (evt) => {
 })
 }
 
+
 // validate the resume form
+if(resumeBtn){
 resumeBtn.addEventListener('click', (evt) => {
-    evt.preventDefault()
+    
     // Select fields
     const fields = {
         personal: {
@@ -215,20 +217,21 @@ resumeBtn.addEventListener('click', (evt) => {
 
     if(errors){
         errorSelectors.finalMessage.textContent = "From validation fail! Please correct the error and try again"
-        errorSelectors.finalMessage.style.color = 'red'
+        
         return
     }else{
         errorSelectors.finalMessage.textContent = "From submition successfully!"
-        errorSelectors.finalMessage.textContent.style.color = 'green'
-       
+        evt.preventDefault()
     }
     
 })
+}
 
 
 // add education field
+if(addEductionFieldBtn){
 addEductionFieldBtn.addEventListener('click', (evt) => {
-    
+
     evt.preventDefault()
     const newEducation = `
         <div class="education-item row mb-3">
@@ -254,7 +257,10 @@ addEductionFieldBtn.addEventListener('click', (evt) => {
         </div>`;
     educationSection.insertAdjacentHTML("beforeend", newEducation);
 })
+}
 
+
+if(addExperienceBtn){
 addExperienceBtn.addEventListener('click', (evt) => {
     evt.preventDefault();
     
@@ -284,7 +290,10 @@ addExperienceBtn.addEventListener('click', (evt) => {
     experience.insertAdjacentHTML("beforeend", newExperience)
 
 })
+}
 
+
+if(addSkillBtn) {
 addSkillBtn.addEventListener('click', (evt) => {
     let newSkills = `
         <div class="skill-item form-row mb-3">
@@ -299,23 +308,31 @@ addSkillBtn.addEventListener('click', (evt) => {
     `
     skills.insertAdjacentHTML('beforeend', newSkills)
 })
+}
  
 // Event delegation for the remove functionality
+if(educationSection){
 educationSection.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("remove-btn")) {
         evt.target.parentElement.remove(); 
     }
 });
+}
 
+
+if(experience){
 experience.addEventListener("click", (evt) =>{
     if (evt.target.classList.contains("remove-btn")) {
         evt.target.parentElement.remove(); 
     }
 })
+}
 
+if(skills){
 skills.addEventListener("click", (evt) =>{
     if (evt.target.classList.contains("remove-btn")) {
         evt.target.parentElement.remove(); 
     }
 })
+}
 

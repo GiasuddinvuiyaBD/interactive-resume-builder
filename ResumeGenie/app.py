@@ -33,9 +33,72 @@ def after_request(response):
 def home():
     return render_template("home.html")
 
-@app.route("/form")
+@app.route("/resume")
+def resume():
+    return render_template("resume.html")
+
+
+@app.route("/form", methods=["GET", "POST"])
 def form():
-    return  render_template("form.html")
+    errors = {}
+
+    if request.method == "POST":
+        # Get form data
+        title = request.form.get("title")
+        name = request.form.get("name")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+        
+        # Title validation
+        if not title:
+            errors["title"] = "Title is required."
+
+        # Name validation
+        if not name:
+            errors["name"] = "Name is required."
+
+        # Email validation
+        if not email:
+            errors["email"] = "Enter a valid email address."
+        else:
+            validEmailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            if not re.match(validEmailPattern, email):
+                errors["email"] = "Invalid email format"
+
+        # Phone validation
+        if not phone:
+            errors["phone"] = "Phone number is required."
+        else:
+            validPhonePattern = r'^\+?\d{10,15}$'
+            if not re.match(validPhonePattern, phone):
+                errors["phone"] = "Invalid phone number format"
+
+        # Education validation
+        degrees = request.form.getlist("degree")
+        institutions = request.form.getlist("institution")
+        years = request.form.getlist("year")
+
+        for index in range(len(degrees)):
+            degree = degrees[index].strip()
+            institution = institutions[index].strip()
+            year = years[index].strip()
+
+            if not degree:
+                errors[f"degree_{index}"] = f"Degree for entry {index + 1} is required."
+            if not institution:
+                errors[f"institution_{index}"] = f"Institution for entry {index + 1} is required."
+            if not year or not year.isdigit() or len(year) != 4:
+                errors[f"year_{index}"] = f"Year for entry {index + 1} must be a valid 4-digit year."
+
+        # If errors exist, return them to the form
+        if errors:
+            return render_template("form.html", errors=errors, form_data=request.form)
+
+        print(title, name, email, phone)
+        # If no errors, redirect or process data
+        return redirect('/resume')
+    
+    return render_template("form.html", errors=errors, form_data=request.form)
 
 
 @app.route("/login", methods = ["GET", "POST"])

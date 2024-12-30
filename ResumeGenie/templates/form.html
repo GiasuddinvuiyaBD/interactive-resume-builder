@@ -10,11 +10,16 @@
 
         <h2 class="form-heading">Create Resume</h2>
 
-        <form action="/resume" method="post">
+        <form action="/form" method="post">
             <div class="personal-info-section">
             <div class="form-group mb-4">
                 <input autocomplete="off" id="title" autofocus class="form-control" name="title" placeholder="Title" type="text">
                 <small class="form-text title-error text-muted"></small>
+                {% if errors.get('title') %}
+                <small class="error form-text text-muted">
+                    {{ errors['title'] }}
+                </small>
+                {% endif %}
             </div>
             <label id="resume-label">Personal Info:</label>
             <div class="form-row">
@@ -23,12 +28,22 @@
                     <div class="form-group mb-4">
                         <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
                         <small class="form-text name-error text-muted"></small>
+                        {% if errors.get('name') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['name'] }}
+                        </small>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
                         <input autocomplete="off" id="email" class="form-control" name="email" placeholder="Email: " type="text">
                         <small class="form-text email-error text-muted"></small>
+                        {% if errors.get('email') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['email'] }}
+                        </small>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -38,6 +53,11 @@
                     <div class="form-group mb-4">
                         <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
                         <small class="form-text phone-error text-muted"></small>
+                        {% if errors.get('phone') %}
+                        <small class="error form-text text-muted">
+                            {{ errors['phone'] }}
+                        </small>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col">
@@ -69,33 +89,46 @@
                 </div>
             </div>
         </div>
-            <!-- skills  -->
+        <!-- Education  -->
         <div class="education-section">
             <label id="resume-label">Education:</label>
+            {% for index in range(form_data.getlist('degree')|length or 1) %}
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="degree" name="[]" placeholder="Degree: " type="text">
-                        <small class="form-text degree-error text-muted"></small>
+                        <input class="form-control" id="degree" name="degree" placeholder="Degree: " type="text" 
+                               value="{{ form_data.getlist('degree')[index] if form_data.getlist('degree') else '' }}">
+                        <small class="error form-text text-muted">
+                            {{ errors.get('degree_' ~ index) }}
+                        </small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="institution" name="[]" placeholder="Institution: " type="text">
-                        <small class="form-text institution-error text-muted"></small>
+                        <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text"
+                               value="{{ form_data.getlist('institution')[index] if form_data.getlist('institution') else '' }}">
+                        <small class="error form-text text-muted">
+                            {{ errors.get('institution_' ~ index) }}
+                        </small>
                     </div>
                 </div>
-             </div>
-             <div class="form-row">
-                <div class="col">
-                    <div class="form-group mb-4">
-                        <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
-                        <small class="form-text year-error text-muted"></small>
-                    </div>
-                </div>
-             </div>
-             <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="educationBtn">Add More</button>
             </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text"
+                               value="{{ form_data.getlist('year')[index] if form_data.getlist('year') else '' }}">
+                        <small class="error form-text text-muted">
+                            {{ errors.get('year_' ~ index) }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="educationBtn">Add More</button>
+        </div>
+        
+        
 
              <!-- work experience -->
             <div class="work-experience-section">
@@ -136,7 +169,7 @@
             </div>
             <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="skillsBtn">Add More Skills</button>
             </div>
-            
+
             <button class="btn btn-primary btn-block" type="submit" id="resumeBtn">Create</button>
             <small class="form-text form-validation-fail text-muted"></small>
         </form>
