@@ -1,6 +1,7 @@
 
 let registrationBtn = document.querySelector("#submitBtn")
 let loginBtn = document.querySelector("#loginBtn")
+let resumeBtn = document.querySelector("#resumeBtn")
 let addEductionFieldBtn = document.querySelector("#educationBtn")
 let addExperienceBtn = document.querySelector("#experienceBtn")
 let addSkillBtn = document.querySelector("#skillsBtn")
@@ -141,6 +142,89 @@ loginBtn.addEventListener('click', (evt) => {
     if(errors) evt.preventDefault();
 })
 }
+
+// validate the resume form
+resumeBtn.addEventListener('click', (evt) => {
+    evt.preventDefault()
+    // Select fields
+    const fields = {
+        personal: {
+            title: document.querySelector("#title"),
+            name: document.querySelector("#name"),
+            email: document.querySelector("#email"),
+            phone: document.querySelector("#phone"),
+        },
+        education: {
+            degree: document.querySelector("#degree"),
+            institution: document.querySelector("#institution"),
+            year: document.querySelector("#year"),
+        },
+        experience: {
+            role: document.querySelector("#role"),
+            company: document.querySelector("#company"),
+            dueYear: document.querySelector("#dueYear"),
+        },
+    };
+    // Error selectors
+    const errorSelectors = {
+        titleError: document.querySelector(".title-error"),
+        nameError: document.querySelector(".name-error"),
+        emailError: document.querySelector(".email-error"),
+        phoneError: document.querySelector(".phone-error"),
+        degreeError: document.querySelector(".degree-error"),
+        institutionError: document.querySelector(".institution-error"),
+        yearError: document.querySelector(".year-error"),
+        finalMessage : document.querySelector(".form-validation-fail")
+    };
+
+    // Track validation state
+    let errors = false;
+
+    // Validation helpers
+    const validateField = (field, errorField, validationFn, errorMsg) => {
+        const value = field.value.trim();
+        if (!validationFn(value)) {
+            errorField.textContent = errorMsg;
+            field.classList.add("is-invalid");
+            errors = true;
+        } else {
+            errorField.textContent = "";
+            field.classList.remove("is-invalid");
+        }
+    };
+
+
+    const isRequired = (value) => value.length > 0;
+    const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
+    const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
+
+
+
+    // Personal Info Validation
+    validateField(fields.personal.title, errorSelectors.titleError, isRequired, "Title is required.");
+    validateField(fields.personal.name, errorSelectors.nameError, isRequired, "Name is required.");
+    validateField(fields.personal.email, errorSelectors.emailError, isEmail, "Enter a valid email address.");
+    validateField(fields.personal.phone, errorSelectors.phoneError, isPhone, "Enter a valid phone number (10-15 digits).");
+
+    // Education Validation
+    validateField(fields.education.degree, errorSelectors.degreeError, isRequired, "Degree is required.");
+    validateField(fields.education.institution, errorSelectors.institutionError, isRequired, "Institution is required.");
+    validateField(fields.education.year, errorSelectors.yearError, isYear, "Enter a valid year (e.g., 2024).");
+
+
+    if(errors){
+        errorSelectors.finalMessage.textContent = "From validation fail! Please correct the error and try again"
+        errorSelectors.finalMessage.style.color = 'red'
+        return
+    }else{
+        errorSelectors.finalMessage.textContent = "From submition successfully!"
+        errorSelectors.finalMessage.textContent.style.color = 'green'
+       
+    }
+    
+})
+
 
 // add education field
 addEductionFieldBtn.addEventListener('click', (evt) => {

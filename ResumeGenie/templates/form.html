@@ -14,7 +14,7 @@
             <div class="personal-info-section">
             <div class="form-group mb-4">
                 <input autocomplete="off" id="title" autofocus class="form-control" name="title" placeholder="Title" type="text">
-                <small class="form-text text-muted"></small>
+                <small class="form-text title-error text-muted"></small>
             </div>
             <label id="resume-label">Personal Info:</label>
             <div class="form-row">
@@ -22,13 +22,13 @@
                 <div class="col">
                     <div class="form-group mb-4">
                         <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text name-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
                         <input autocomplete="off" id="email" class="form-control" name="email" placeholder="Email: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text email-error text-muted"></small>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text phone-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
@@ -76,13 +76,13 @@
                 <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="degree" name="[]" placeholder="Degree: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text degree-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="institution" name="[]" placeholder="Institution: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text institution-error text-muted"></small>
                     </div>
                 </div>
              </div>
@@ -90,7 +90,7 @@
                 <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text year-error text-muted"></small>
                     </div>
                 </div>
              </div>
@@ -104,19 +104,19 @@
                 <div class="col">
                     <div class="form-group mb-5">
                         <input class="form-control" id="role" name="[]" placeholder="Role: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text role-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
                         <input class="form-control" id="company" name="[]" placeholder="Company: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text company-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
                         <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
-                        <small class="form-text text-muted"></small>
+                        <small class="form-text dueYear-error text-muted"></small>
                     </div>
                 </div>
             </div>
@@ -136,7 +136,9 @@
             </div>
             <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="skillsBtn">Add More Skills</button>
             </div>
-            <button class="btn btn-primary btn-block" type="submit" id="resemeBtn">Create</button>
+            
+            <button class="btn btn-primary btn-block" type="submit" id="resumeBtn">Create</button>
+            <small class="form-text form-validation-fail text-muted"></small>
         </form>
     </div>
 </div>
