@@ -1,7 +1,8 @@
 
 import re 
+import json
 from cs50 import SQL 
-from flask import Flask, flash, redirect, render_template, session, request
+from flask import Flask, flash, redirect, render_template, session, request, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology
@@ -46,8 +47,44 @@ def form():
         # Get form data
         title = request.form.get("title")
         name = request.form.get("name")
-        email = request.form.get("email")
+        email = request.form.get("email_")
         phone = request.form.get("phone")
+        country = request.form.get("country")
+        city = request.form.get("city")
+        linkedin = request.form.get("linkedin")
+        portfolio = request.form.get("portfolio")
+
+        print(title, name, email, phone, country, city, linkedin, portfolio)
+
+        # Extract education, work experience, and skills
+        education = [
+            {
+                "degree": degree,
+                "institution": institution,
+                "year": year
+            }
+            for degree, institution, year in zip(
+                request.form.get('degree'),
+                request.form.get('institution'),
+                request.form.get('year')
+            )
+        ]
+
+        work_experience = [
+            {
+                "role": role,
+                "company": company,
+                "year": work_year
+            }
+            for role, company, work_year in zip(
+                request.form.getlist('role'),
+                request.form.getlist('company'),
+                request.form.getlist('work_year')
+            )
+        ]
+
+        skills = request.form.getlist('skill')  # List of skills
+
         
         # Title validation
         if not title:
@@ -94,9 +131,37 @@ def form():
         if errors:
             return render_template("form.html", errors=errors, form_data=request.form)
 
-        print(title, name, email, phone)
-        # If no errors, redirect or process data
-        return redirect('/resume')
+        try:
+            # db.execute('''
+            #     INSERT INTO resumes (
+            #         user_id, title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
+            #     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            # ''', (
+            #     0 , title, name, email, phone, country, city, linkedin, portfolio,
+            #     json.dumps(education),  # Convert list of dicts to JSON
+            #     json.dumps(work_experience),  # Convert list of dicts to JSON
+            #     json.dumps(skills)  # Convert list to JSON
+            # ))
+
+            education_json = json.dumps(education) if education else "[]"
+            work_experience_json = json.dumps(work_experience) if work_experience else "[]"
+            skills_json = json.dumps(skills) if skills else "[]"
+
+            db.execute('''
+                INSERT INTO resumes_2 (
+                    user_id, title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                0, title, name, email, phone, country, city, linkedin, portfolio,
+                education_json, work_experience_json, skills_json
+            ))
+
+            flash("Resume submitted successfully!")
+            return redirect("/resume")
+        except Exception as e:
+            flash(f"Error saving resume: {e}")
+            return render_template("form.html", errors=errors, form_data=request.form)
+      
     
     return render_template("form.html", errors=errors, form_data=request.form)
 

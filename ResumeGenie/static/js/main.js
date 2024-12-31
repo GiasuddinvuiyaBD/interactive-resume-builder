@@ -155,6 +155,8 @@ resumeBtn.addEventListener('click', (evt) => {
             name: document.querySelector("#name"),
             email: document.querySelector("#email"),
             phone: document.querySelector("#phone"),
+            country: document.querySelector("#country"),
+            city: document.querySelector("#city"),
         },
         education: {
             degree: document.querySelector("#degree"),
@@ -198,9 +200,10 @@ resumeBtn.addEventListener('click', (evt) => {
 
     const isRequired = (value) => value.length > 0;
     const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
-    const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
-
+    const isPhone = (value) => (value); // Supports international format
+    // const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
+    const isYear = (value) => (value);
+    // const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
 
 
     // Personal Info Validation
@@ -222,8 +225,24 @@ resumeBtn.addEventListener('click', (evt) => {
     }else{
         errorSelectors.finalMessage.textContent = "From submition successfully!"
         evt.preventDefault()
+
+        // reset default value
+        fields.personal.title.value = ""
+        fields.personal.name.value = ""
+        fields.personal.email.value = ""
+        fields.personal.phone.value = ""
+        fields.personal.country.value = ""
+        fields.personal.city.value = ""
+
+        fields.education.degree.value = ""
+        fields.education.institution.value = ""
+        fields.education.year.value = ""
+
+        fields.experience.role.value = ""
+        fields.experience.company.value = ""
+        fields.experience.dueYear.value = ""
     }
-    
+   
 })
 }
 
