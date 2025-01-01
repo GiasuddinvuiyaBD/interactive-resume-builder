@@ -295,19 +295,19 @@ addEductionFieldBtn.addEventListener('click', (evt) => {
         <div class="education-item row mb-3">
             <div class="col">
                 <div class="form-group mb-4">
-                    <input class="form-control" id="degree" name="[]" placeholder="Degree: " type="text">
+                    <input class="form-control" id="degree" name="degree" placeholder="Degree: " type="text">
                     <small class="form-text text-muted"></small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group mb-4">
-                    <input class="form-control" id="institution" name="[]" placeholder="Institution: " type="text">
+                    <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text">
                     <small class="form-text text-muted"></small>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group mb-4">
-                    <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
+                    <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
                     <small class="form-text text-muted"></small>
                 </div>
             </div>
@@ -326,19 +326,19 @@ addExperienceBtn.addEventListener('click', (evt) => {
             <div class="education-item form-row mb-3">
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="role" name="[]" placeholder="Role: " type="text">
+                        <input class="form-control" id="role" name="role" placeholder="Role: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="company" name="[]" placeholder="Company: " type="text">
+                        <input class="form-control" id="company" name="company" placeholder="Company: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="year" name="[]" placeholder="Year: " type="text">
+                        <input class="form-control" id="work_year" name="work_year" placeholder="Year: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>

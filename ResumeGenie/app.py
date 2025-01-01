@@ -75,15 +75,12 @@ def form():
         ]
 
         skills = [skill.strip() for skill in request.form.getlist("skill")]
-
         # Title validation
         if not title:
             errors["title"] = "Title is required."
-
         # Name validation
         if not name:
             errors["name"] = "Name is required."
-
         # Email validation
         if not email:
             errors["email"] = "Email is required."
@@ -111,18 +108,7 @@ def form():
 
         # Insert into the database
         try:
-            # Why it's not working i don't know -----
-            # db.execute('''
-            #     INSERT INTO resumes_r (
-            #         title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
-            #     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            # ''', (
-            #     title, name, email, phone, country, city, linkedin, portfolio or "",
-            #     json.dumps(education), json.dumps(work_experience), json.dumps(skills)
-            # ))
-
             db.execute("INSERT INTO resumes_r (title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", title, name, email, phone, country, city, linkedin, portfolio or "", json.dumps(education), json.dumps(work_experience), json.dumps(skills))
-
             
             flash("Resume submitted successfully!")
             return redirect("/resume")
@@ -144,7 +130,7 @@ def login():
         password = request.form.get("password").strip()
 
         user = db.execute("SELECT * FROM users WHERE email = ?", email)
-        print(user)
+        # print(user)
 
         if len(user) != 1: 
             flash("Invalid email or password")
