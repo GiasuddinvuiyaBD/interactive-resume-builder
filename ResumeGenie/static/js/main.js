@@ -141,45 +141,67 @@ loginBtn.addEventListener('click', (evt) => {
 
     if(errors) evt.preventDefault();
 })
-}
+}    
 
+// resume form validation
+// Select fields
+const fields = {
+    personal: {
+        title: document.querySelector("#title"),
+        name: document.querySelector("#name"),
+        email: document.querySelector("#email"),
+        phone: document.querySelector("#phone"),
+        country: document.querySelector("#country"),
+        city: document.querySelector("#city"),
+        linkedin: document.querySelector("#linkedin"),
+        portfolio: document.querySelector("#portfolio"),
+    },
+    education: {
+        degree: document.querySelector("#degree"),
+        institution: document.querySelector("#institution"),
+        year: document.querySelector("#year"),
+    },
+    experience: {
+        role: document.querySelector("#role"),
+        company: document.querySelector("#company"),
+        work_year: document.querySelector("#work_year"),
+    },
+};
+
+// default value
+fields.personal.title.value = "Software Engineer"
+fields.personal.name.value = "Gias uddin vuiya"
+fields.personal.email.value = "giasuddin_harvard@gmail.com"
+fields.personal.phone.value = "01210001337"
+fields.personal.country.value = "Bangladesh"
+fields.personal.city.value = "Dhaka"
+fields.personal.linkedin.value = "https://www.linkedin.com/in/brian-yu/"
+fields.personal.portfolio.value = ""
+
+fields.education.degree.value = "CSE"
+fields.education.institution.value = "Harvard"
+fields.education.year.value = "2024"
+
+fields.experience.role.value = "Engineer"
+fields.experience.company.value = "Microsoft"
+fields.experience.work_year.value = "2023"
+
+
+// Error selectors
+const errorSelectors = {
+    titleError: document.querySelector(".title-error"),
+    nameError: document.querySelector(".name-error"),
+    emailError: document.querySelector(".email-error"),
+    phoneError: document.querySelector(".phone-error"),
+    degreeError: document.querySelector(".degree-error"),
+    institutionError: document.querySelector(".institution-error"),
+    yearError: document.querySelector(".year-error"),
+    finalMessage : document.querySelector(".form-validation-fail")
+};
 
 // validate the resume form
 if(resumeBtn){
 resumeBtn.addEventListener('click', (evt) => {
-    
-    // Select fields
-    const fields = {
-        personal: {
-            title: document.querySelector("#title"),
-            name: document.querySelector("#name"),
-            email: document.querySelector("#email"),
-            phone: document.querySelector("#phone"),
-            country: document.querySelector("#country"),
-            city: document.querySelector("#city"),
-        },
-        education: {
-            degree: document.querySelector("#degree"),
-            institution: document.querySelector("#institution"),
-            year: document.querySelector("#year"),
-        },
-        experience: {
-            role: document.querySelector("#role"),
-            company: document.querySelector("#company"),
-            dueYear: document.querySelector("#dueYear"),
-        },
-    };
-    // Error selectors
-    const errorSelectors = {
-        titleError: document.querySelector(".title-error"),
-        nameError: document.querySelector(".name-error"),
-        emailError: document.querySelector(".email-error"),
-        phoneError: document.querySelector(".phone-error"),
-        degreeError: document.querySelector(".degree-error"),
-        institutionError: document.querySelector(".institution-error"),
-        yearError: document.querySelector(".year-error"),
-        finalMessage : document.querySelector(".form-validation-fail")
-    };
 
     // Track validation state
     let errors = false;
@@ -217,35 +239,52 @@ resumeBtn.addEventListener('click', (evt) => {
     validateField(fields.education.institution, errorSelectors.institutionError, isRequired, "Institution is required.");
     validateField(fields.education.year, errorSelectors.yearError, isYear, "Enter a valid year (e.g., 2024).");
 
-
+    // 
     if(errors){
         errorSelectors.finalMessage.textContent = "From validation fail! Please correct the error and try again"
-        
+        evt.preventDefault()
         return
     }else{
-        errorSelectors.finalMessage.textContent = "From submition successfully!"
-        evt.preventDefault()
-
-        // reset default value
-        fields.personal.title.value = ""
-        fields.personal.name.value = ""
-        fields.personal.email.value = ""
-        fields.personal.phone.value = ""
-        fields.personal.country.value = ""
-        fields.personal.city.value = ""
-
-        fields.education.degree.value = ""
-        fields.education.institution.value = ""
-        fields.education.year.value = ""
-
-        fields.experience.role.value = ""
-        fields.experience.company.value = ""
-        fields.experience.dueYear.value = ""
-    }
-   
+        errorSelectors.finalMessage.textContent = "Form submitted successfully!";
+        //  i will work with reset functionality later 
+        // reset()
+    }  
 })
 }
 
+
+const reset = (() => {
+    // Clear static fields
+    fields.personal.title.value = "";
+    fields.personal.name.value = "";
+    fields.personal.email.value = "";
+    fields.personal.phone.value = "";
+    fields.personal.country && (fields.personal.country.value = ""); // Optional field
+    fields.personal.city && (fields.personal.city.value = "");       // Optional field
+    fields.personal.linkedin && (fields.personal.linkedin.value = "");
+    fields.personal.portfolio && (fields.personal.portfolio.value = "");
+
+    fields.education.degree.value = "";
+    fields.education.institution.value = "";
+    fields.education.year.value = "";
+
+    fields.experience.role.value = "";
+    fields.experience.company.value = "";
+    fields.experience.work_year && (fields.experience.work_year.value = ""); // Optional field
+
+    // Remove dynamically added fields
+    const dynamicEducationItems = document.querySelectorAll(".education-item.row");
+    dynamicEducationItems.forEach(item => item.remove());
+
+    const dynamicExperienceItems = document.querySelectorAll(".experience-item.row");
+    dynamicExperienceItems.forEach(item => item.remove());
+
+    // Optionally, reset the form completely
+    const form = document.querySelector("#yourFormID"); // Replace with your form's ID
+    form.reset();
+
+    evt.preventDefault(); // Prevent default form submission
+})
 
 // add education field
 if(addEductionFieldBtn){

@@ -9,11 +9,11 @@
     <div class="form-container">
 
         <h2 class="form-heading">Create Resume</h2>
-
-        <form action="/form" method="post">
+        
+        <form action="/form" method="post" id="resumeForm">
             <div class="personal-info-section">
             <div class="form-group mb-4">
-                <input autocomplete="off" id="title" autofocus class="form-control" name="title" value="Software Engineer" placeholder="Title" type="text">
+                <input autocomplete="off" id="title" autofocus class="form-control" name="title" placeholder="Title" type="text">
                 <small class="form-text title-error text-muted"></small>
                 {% if errors.get('title') %}
                 <small class="error form-text text-muted">
@@ -26,7 +26,7 @@
                 <!-- Name and Email Inline -->
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input autocomplete="off" id="name" autofocus class="form-control" name="name" value="Gias uddin vuiya" placeholder="Name: " type="text">
+                        <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
                         <small class="form-text name-error text-muted"></small>
                         {% if errors.get('name') %}
                         <small class="error form-text text-muted">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input autocomplete="off" id="email" class="form-control" name="email_" value="giasuddinvuiya2022@gmail.com" placeholder="Email: " type="text">
+                        <input autocomplete="off" id="email" class="form-control" name="email_"  placeholder="Email: " type="text">
                         <small class="form-text email-error text-muted"></small>
                         {% if errors.get('email') %}
                         <small class="error form-text text-muted">
@@ -51,7 +51,7 @@
                 <!-- phone country  and city Inline -->
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="phone" name="phone" value="01210001337" placeholder="Phone: " type="phone">
+                        <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
                         <small class="form-text phone-error text-muted"></small>
                         {% if errors.get('phone') %}
                         <small class="error form-text text-muted">
@@ -62,13 +62,13 @@
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="country" name="country" value="Bangladesh" placeholder="Country: " type="text">
+                        <input class="form-control" id="country" name="country"  placeholder="Country: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="city" name="city" value="Dhaka" placeholder="City: " type="text">
+                        <input class="form-control" id="city" name="city"  placeholder="City: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
@@ -95,13 +95,13 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="degree" name="degree" value="CSE" placeholder="Degree: " type="text">
+                        <input class="form-control" id="degree" name="degree"  placeholder="Degree: " type="text">
                         <small class="error form-text degree-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="institution" name="institution" value="DU" placeholder="Institution: " type="text">
+                        <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text">
                         <small class="error form-text institution-error text-muted"></small>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-4">
-                        <input class="form-control" id="year" name="year" value="2024" placeholder="Year: " type="text">
+                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
                         <small class="error form-text year-error  text-muted"> </small>
                     </div>
                 </div>
@@ -124,19 +124,19 @@
             <div class="form-row">
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="role" name="role" value="Engineer" placeholder="Role: " type="text">
+                        <input class="form-control" id="role" name="role" placeholder="Role: " type="text">
                         <small class="form-text role-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="company" name="company" value="GVD" placeholder="Company: " type="text">
+                        <input class="form-control" id="company" name="company" placeholder="Company: " type="text">
                         <small class="form-text company-error text-muted"></small>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group mb-5">
-                        <input class="form-control" id="year" name="work_year" value="2022" placeholder="Year: " type="text">
+                        <input class="form-control" id="work_year" name="work_year" placeholder="Year: " type="text">
                         <small class="form-text dueYear-error text-muted"></small>
                     </div>
                 </div>
