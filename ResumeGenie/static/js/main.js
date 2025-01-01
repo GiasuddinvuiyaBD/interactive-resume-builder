@@ -222,10 +222,10 @@ resumeBtn.addEventListener('click', (evt) => {
 
     const isRequired = (value) => value.length > 0;
     const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const isPhone = (value) => (value); // Supports international format
-    // const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
-    const isYear = (value) => (value);
-    // const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
+    // const isPhone = (value) => (value); // Supports international format
+    const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
+    // const isYear = (value) => (value);
+    const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
 
 
     // Personal Info Validation

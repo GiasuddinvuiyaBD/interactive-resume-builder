@@ -45,129 +45,96 @@ def form():
 
     if request.method == "POST":
         # Get form data
-        title = request.form.get("title")
-        name = request.form.get("name")
-        email = request.form.get("email_")
-        phone = request.form.get("phone")
-        country = request.form.get("country")
-        city = request.form.get("city")
-        linkedin = request.form.get("linkedin")
-        portfolio = request.form.get("portfolio")
-
-        print(title, name, email, phone, country, city, linkedin, portfolio)
+        title = request.form.get("title", "").strip()
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email_", "").strip()
+        phone = request.form.get("phone", "").strip()
+        country = request.form.get("country", "").strip()
+        city = request.form.get("city", "").strip()
+        linkedin = request.form.get("linkedin", "").strip()
+        portfolio = request.form.get("portfolio", "").strip()
 
         # Extract education, work experience, and skills
+        degrees = request.form.getlist("degree")
+        institutions = request.form.getlist("institution")
+        years = request.form.getlist("year")
+
+        #  
         education = [
-            {
-                "degree": degree,
-                "institution": institution,
-                "year": year
-            }
-            for degree, institution, year in zip(
-                request.form.get('degree'),
-                request.form.get('institution'),
-                request.form.get('year')
-            )
+            {"degree": degree.strip(), "institution": institution.strip(), "year": year.strip()}
+            for degree, institution, year in zip(degrees, institutions, years)
         ]
 
         work_experience = [
-            {
-                "role": role,
-                "company": company,
-                "year": work_year
-            }
+            {"role": role.strip(), "company": company.strip(), "year": work_year.strip()}
             for role, company, work_year in zip(
-                request.form.getlist('role'),
-                request.form.getlist('company'),
-                request.form.getlist('work_year')
+                request.form.getlist("role"),
+                request.form.getlist("company"),
+                request.form.getlist("work_year")
             )
         ]
 
-        skills = request.form.getlist('skill')  # List of skills
+        skills = [skill.strip() for skill in request.form.getlist("skill")]
 
-        
         # Title validation
-        # if not title:
-        #     errors["title"] = "Title is required."
+        if not title:
+            errors["title"] = "Title is required."
 
         # Name validation
-        # if not name:
-        #     errors["name"] = "Name is required."
+        if not name:
+            errors["name"] = "Name is required."
 
         # Email validation
-        # if not email:
-        #     errors["email"] = "Enter a valid email address."
-        # else:
-        #     validEmailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-        #     if not re.match(validEmailPattern, email):
-        #         errors["email"] = "Invalid email format"
+        if not email:
+            errors["email"] = "Email is required."
+        elif not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email):
+            errors["email"] = "Invalid email format."
 
         # Phone validation
-        # if not phone:
-        #     errors["phone"] = "Phone number is required."
-        # else:
-        #     validPhonePattern = r'^\+?\d{10,15}$'
-        #     if not re.match(validPhonePattern, phone):
-        #         errors["phone"] = "Invalid phone number format"
+        if not phone:
+            errors["phone"] = "Phone number is required."
+        elif not re.match(r"^\+?\d{10,15}$", phone):
+            errors["phone"] = "Phone number must be 10-15 digits long."
 
         # Education validation
-        # degrees = request.form.getlist("degree")
-        # institutions = request.form.getlist("institution")
-        # years = request.form.getlist("year")
-
-        # for index in range(len(degrees)):
-        #     degree = degrees[index].strip()
-        #     institution = institutions[index].strip()
-        #     year = years[index].strip()
-
-        #     if not degree:
-        #         errors[f"degree_{index}"] = f"Degree for entry {index + 1} is required."
-        #     if not institution:
-        #         errors[f"institution_{index}"] = f"Institution for entry {index + 1} is required."
-        #     if not year or not year.isdigit() or len(year) != 4:
-        #         errors[f"year_{index}"] = f"Year for entry {index + 1} must be a valid 4-digit year."
-
-        
-        
+        for index, edu in enumerate(education):
+            if not edu["degree"]:
+                errors[f"degree_{index}"] = f"Degree for entry {index + 1} is required."
+            if not edu["institution"]:
+                errors[f"institution_{index}"] = f"Institution for entry {index + 1} is required."
+            if not edu["year"] or not edu["year"].isdigit() or len(edu["year"]) != 4:
+                errors[f"year_{index}"] = f"Year for entry {index + 1} must be a 4-digit number."
 
         # If errors exist, return them to the form
-        # if errors:
-        #     return render_template("form.html", errors=errors, form_data=request.form)
+        if errors:
+            return render_template("form.html", errors=errors, form_data=request.form)
 
-        # try:
+        # Insert into the database
+        try:
+            # Why it's not working i don't know -----
             # db.execute('''
-            #     INSERT INTO resumes (
-            #         user_id, title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
-            #     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            #     INSERT INTO resumes_r (
+            #         title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
+            #     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             # ''', (
-            #     0 , title, name, email, phone, country, city, linkedin, portfolio,
-            #     json.dumps(education),  # Convert list of dicts to JSON
-            #     json.dumps(work_experience),  # Convert list of dicts to JSON
-            #     json.dumps(skills)  # Convert list to JSON
+            #     title, name, email, phone, country, city, linkedin, portfolio or "",
+            #     json.dumps(education), json.dumps(work_experience), json.dumps(skills)
             # ))
 
-            # education_json = json.dumps(education) if education else "[]"
-            # work_experience_json = json.dumps(work_experience) if work_experience else "[]"
-            # skills_json = json.dumps(skills) if skills else "[]"
+            db.execute("INSERT INTO resumes_r (title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", title, name, email, phone, country, city, linkedin, portfolio or "", json.dumps(education), json.dumps(work_experience), json.dumps(skills))
 
-            # db.execute('''
-            #     INSERT INTO resumes_2 (
-            #         user_id, title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills
-            #     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            # ''', (
-            #     0, title, name, email, phone, country, city, linkedin, portfolio,
-            #     education_json, work_experience_json, skills_json
-            # ))
+            
+            flash("Resume submitted successfully!")
+            return redirect("/resume")
+        except Exception as e:
+            # Log the error for debugging
+            app.logger.error(f"Database error: {e}")
+            flash("An error occurred while saving your resume. Please try again.")
+            return render_template("form.html", errors=errors, form_data=request.form)
 
-        #     flash("Resume submitted successfully!")
-        #     return redirect("/resume")
-        # except Exception as e:
-        #     flash(f"Error saving resume: {e}")
-        #     return render_template("form.html", errors=errors, form_data=request.form)
-      
-    
-    return render_template("form.html", errors=errors, form_data=request.form)
 
+    return render_template("form.html", errors=errors, form_data={})
+  
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
