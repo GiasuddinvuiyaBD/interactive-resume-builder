@@ -1,9 +1,80 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Resume
+    Resume Genie
 {% endblock %}
 
 {% block main %}
-    <h2>Resume</h2>
+<div class="container my-5 p-4 bg-white shadow rounded">
+    <header class="text-center mb-5">
+        <h1 class="fw-bold text-primary text-gradient">Your Name</h1>
+        <p class="text-muted">
+            Your Address | Your Phone Number | 
+            <a href="mailto:youremail@example.com" class="text-decoration-none">Your Email</a>
+        </p>
+        <p>
+            <a href="#" class="btn btn-outline-primary btn-sm me-2">LinkedIn</a>
+            <a href="#" class="btn btn-outline-secondary btn-sm">Portfolio</a>
+        </p>
+    </header>
+
+    <section class="mb-5">
+        <h2 class="text-uppercase border-bottom pb-2">Professional Summary</h2>
+        <p class="fs-5 text-muted">A concise overview of your career highlights, key skills, and what you bring to the role.</p>
+    </section>
+
+    <section class="mb-5 skills-btn">
+        <h2 class="text-uppercase  border-bottom pb-2">Skills</h2>
+        <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-primary text-white">HTML</span>
+            <span class="badge bg-success text-white">CSS</span>
+            <span class="badge bg-warning text-dark">JavaScript</span>
+            <span class="badge bg-info text-dark">Python</span>
+            <span class="badge bg-secondary text-white">React</span>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-uppercase border-bottom pb-2">Work Experience</h2>
+        <ul class="list-unstyled">
+            <li class="mb-3">
+                <strong>Job Title</strong> - <em>Company Name</em> (Month/Year - Present)
+                <p class="text-muted">Describe your responsibilities and achievements in this role.</p>
+            </li>
+            <li class="mb-3">
+                <strong>Job Title</strong> - <em>Company Name</em> (Month/Year - Month/Year)
+                <p class="text-muted">Describe your responsibilities and achievements in this role.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-uppercase border-bottom pb-2">Education</h2>
+        <ul class="list-unstyled">
+            <li>
+                <strong>Degree</strong> - <em>University Name</em> (Month/Year - Month/Year)
+            </li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="text-uppercase border-bottom pb-2">Projects</h2>
+        <ul class="list-unstyled">
+            <li class="mb-3">
+                <strong>Project Name</strong>
+                <p class="text-muted">A brief description of the project and its outcomes.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2 class="text-uppercase border-bottom pb-2">Volunteer Experience</h2>
+        <ul class="list-unstyled">
+            <li>
+                <strong>Role</strong> - <em>Organization Name</em> (Month/Year - Month/Year)
+                <p class="text-muted">Describe your contributions and achievements.</p>
+            </li>
+        </ul>
+    </section>
+</div>
 {% endblock %}

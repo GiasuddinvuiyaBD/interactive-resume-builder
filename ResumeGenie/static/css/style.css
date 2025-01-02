@@ -173,3 +173,11 @@ body{
         font-size: 0.9rem;
     }
 }
+
+/* ==Resume template== */
+.d-flex {
+    justify-content: center;
+}
+
+
+
