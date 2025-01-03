@@ -34,13 +34,35 @@ def after_request(response):
 def home():
     return render_template("home.html")
 
-@app.route("/resume")
+@app.route("/resume", methods=["GET"])
 def resume():
-    return render_template("resume.html")
+    try:
+        # Fetch all resumes from the database
+        resumes = db.execute("SELECT * FROM resumes_")
+        
+        # Process JSON fields for proper rendering in the UI
+        for resume in resumes:
+            if 'education' in resume and resume['education']:
+                resume['education'] = json.loads(resume['education'])
+            if 'work_experience' in resume and resume['work_experience']:
+                resume['work_experience'] = json.loads(resume['work_experience'])
+            if 'skills' in resume and resume['skills']:
+                resume['skills'] = json.loads(resume['skills'])
+
+        print(resume)
+        # Pass resumes to the template
+        return render_template("resume.html", resumes=resumes)
+    except Exception as e:
+        app.logger.error(f"Error fetching resumes: {e}")
+        flash("An error occurred while fetching resumes.")
+        return render_template("resume.html", resumes=[])
+
+
 
 
 @app.route("/form", methods=["GET", "POST"])
 def form():
+
     errors = {}
 
     if request.method == "POST":
@@ -49,10 +71,10 @@ def form():
         name = request.form.get("name", "").strip()
         email = request.form.get("email_", "").strip()
         phone = request.form.get("phone", "").strip()
-        country = request.form.get("country", "").strip()
-        city = request.form.get("city", "").strip()
+        address = request.form.get("address", "").strip()
         linkedin = request.form.get("linkedin", "").strip()
         portfolio = request.form.get("portfolio", "").strip()
+        professional_summary = request.form.get("professional-summary", "").strip()
 
         # Extract education, work experience, and skills
         degrees = request.form.getlist("degree")
@@ -108,7 +130,7 @@ def form():
 
         # Insert into the database
         try:
-            db.execute("INSERT INTO resumes_r (title, name, email, phone, country, city, linkedin, portfolio, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", title, name, email, phone, country, city, linkedin, portfolio or "", json.dumps(education), json.dumps(work_experience), json.dumps(skills))
+            db.execute("INSERT INTO resumes_ (title, name, email, phone,  address, linkedin, portfolio,professional_summary, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", title, name, email, phone, address, linkedin, portfolio or "", professional_summary, json.dumps(education), json.dumps(work_experience), json.dumps(skills))
             
             flash("Resume submitted successfully!")
             return redirect("/resume")
@@ -117,7 +139,6 @@ def form():
             app.logger.error(f"Database error: {e}")
             flash("An error occurred while saving your resume. Please try again.")
             return render_template("form.html", errors=errors, form_data=request.form)
-
 
     return render_template("form.html", errors=errors, form_data={})
   

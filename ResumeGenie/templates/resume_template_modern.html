@@ -1,0 +1,15 @@
+<div class="card border-success">
+    <div class="card-header bg-success text-white">
+        <h4>{{ resume.name }}</h4>
+        <p class="mb-0">{{ resume.title }}</p>
+    </div>
+    <div class="card-body">
+        <h5 class="text-success">Skills</h5>
+        <div class="d-flex flex-wrap gap-2">
+            {% for skill in resume.skills %}
+            <span class="badge bg-success">{{ skill }}</span>
+            {% endfor %}
+        </div>
+        <!-- Other sections here -->
+    </div>
+</div>

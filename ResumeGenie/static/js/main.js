@@ -6,7 +6,6 @@ let addEductionFieldBtn = document.querySelector("#educationBtn")
 let addExperienceBtn = document.querySelector("#experienceBtn")
 let addSkillBtn = document.querySelector("#skillsBtn")
 
-
 let educationSection = document.querySelector(".education-section");
 let experience = document.querySelector(".work-experience-section")
 let skills = document.querySelector(".skill-section")
@@ -20,7 +19,7 @@ registrationBtn.addEventListener("click", (evt) => {
     let emailField = document.querySelector("#email");
     let passwordField = document.querySelector("#password");
     let confirmationField = document.querySelector("#confirmation");
-
+    
     let userName = userNameField.value.trim();
     let email = emailField.value.trim();
     let password = passwordField.value.trim();
@@ -31,7 +30,6 @@ registrationBtn.addEventListener("click", (evt) => {
     let emailError = document.querySelector(".email-error")
     let passwordError = document.querySelector(".password-error")
     let confirmationError = document.querySelector(".confirmation-error")
-
 
     // registation field validation
     let error = false;
@@ -151,10 +149,10 @@ const fields = {
         name: document.querySelector("#name"),
         email: document.querySelector("#email"),
         phone: document.querySelector("#phone"),
-        country: document.querySelector("#country"),
-        city: document.querySelector("#city"),
+        address: document.querySelector("#address"),
         linkedin: document.querySelector("#linkedin"),
         portfolio: document.querySelector("#portfolio"),
+        professionalSummary: document.querySelector("#professional-summary")
     },
     education: {
         degree: document.querySelector("#degree"),
@@ -168,15 +166,15 @@ const fields = {
     },
 };
 
-// default value
+// default value 
 fields.personal.title.value = "Software Engineer"
 fields.personal.name.value = "Gias uddin vuiya"
 fields.personal.email.value = "giasuddin_harvard@gmail.com"
 fields.personal.phone.value = "01210001337"
-fields.personal.country.value = "Bangladesh"
-fields.personal.city.value = "Dhaka"
+fields.personal.address.value = "Dhaka Bangladesh"
+fields.personal.professionalSummary.value = "A concise overview of your career highlights, key skills, and what you bring to the role."
 fields.personal.linkedin.value = "https://www.linkedin.com/in/brian-yu/"
-fields.personal.portfolio.value = ""
+fields.personal.portfolio.value = "https://www.protfolio.com"
 
 fields.education.degree.value = "CSE"
 fields.education.institution.value = "Harvard"
@@ -205,7 +203,6 @@ resumeBtn.addEventListener('click', (evt) => {
 
     // Track validation state
     let errors = false;
-
     // Validation helpers
     const validateField = (field, errorField, validationFn, errorMsg) => {
         const value = field.value.trim();
@@ -219,14 +216,11 @@ resumeBtn.addEventListener('click', (evt) => {
         }
     };
 
-
+    // 
     const isRequired = (value) => value.length > 0;
     const isEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    // const isPhone = (value) => (value); // Supports international format
     const isPhone = (value) => /^\+?\d{10,15}$/.test(value); // Supports international format
-    // const isYear = (value) => (value);
     const isYear = (value) => /^\d{4}$/.test(value) && value >= 1900 && value <= new Date().getFullYear();
-
 
     // Personal Info Validation
     validateField(fields.personal.title, errorSelectors.titleError, isRequired, "Title is required.");
@@ -259,10 +253,13 @@ const reset = (() => {
     fields.personal.name.value = "";
     fields.personal.email.value = "";
     fields.personal.phone.value = "";
-    fields.personal.country && (fields.personal.country.value = ""); // Optional field
-    fields.personal.city && (fields.personal.city.value = "");       // Optional field
+    fields.personal.professionalSummary.value = ""
+    // fields.personal.country && (fields.personal.country.value = ""); // Optional field
+    // fields.personal.city && (fields.personal.city.value = "");       // Optional field
+    fields.personal.portfolio && (fields.personal.address.value = "");
     fields.personal.linkedin && (fields.personal.linkedin.value = "");
     fields.personal.portfolio && (fields.personal.portfolio.value = "");
+    
 
     fields.education.degree.value = "";
     fields.education.institution.value = "";

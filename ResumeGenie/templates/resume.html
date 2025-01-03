@@ -1,80 +1,78 @@
 {% extends "layout.html" %}
 
-{% block title %}
-    Resume Genie
-{% endblock %}
+{% block title %}Resumes{% endblock %}
 
 {% block main %}
-<div class="container my-5 p-4 bg-white shadow rounded">
-    <header class="text-center mb-5">
-        <h1 class="fw-bold text-primary text-gradient">Your Name</h1>
-        <p class="text-muted">
-            Your Address | Your Phone Number | 
-            <a href="mailto:youremail@example.com" class="text-decoration-none">Your Email</a>
-        </p>
-        <p>
-            <a href="#" class="btn btn-outline-primary btn-sm me-2">LinkedIn</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm">Portfolio</a>
-        </p>
-    </header>
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">Resumes</h1>
 
-    <section class="mb-5">
-        <h2 class="text-uppercase border-bottom pb-2">Professional Summary</h2>
-        <p class="fs-5 text-muted">A concise overview of your career highlights, key skills, and what you bring to the role.</p>
-    </section>
+    {% if resumes %}
+        <div class="row">
+            {% for resume in resumes %}
+            <div class="col-lg-6 col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-1">{{ resume.name }}</h4>
+                        <small class="text-light">{{ resume.title }}</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <p>
+                                <strong>Email:</strong> 
+                                <a href="mailto:{{ resume.email }}" class="text-decoration-none">{{ resume.email }}</a><br>
+                                <strong>Phone:</strong> {{ resume.phone }}<br>
+                                <strong>Address:</strong> {{ resume.address }}
+                            </p>
+                        </div>
 
-    <section class="mb-5 skills-btn">
-        <h2 class="text-uppercase  border-bottom pb-2">Skills</h2>
-        <div class="d-flex flex-wrap gap-2">
-            <span class="badge bg-primary text-white">HTML</span>
-            <span class="badge bg-success text-white">CSS</span>
-            <span class="badge bg-warning text-dark">JavaScript</span>
-            <span class="badge bg-info text-dark">Python</span>
-            <span class="badge bg-secondary text-white">React</span>
+                        <h5 class="text-primary">Professional Summary</h5>
+                        <p>{{ resume.professional_summary }}</p>
+
+                        <h5 class="text-primary">Education</h5>
+                        <ul class="list-unstyled">
+                            {% for edu in resume.education %}
+                            <li>
+                                <strong>{{ edu.degree }}</strong> - {{ edu.institution }} ({{ edu.year }})
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <h5 class="text-primary">Work Experience</h5>
+                        <ul class="list-unstyled">
+                            {% for work in resume.work_experience %}
+                            <li>
+                                <strong>{{ work.role }}</strong> at {{ work.company }} ({{ work.year }})
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <h5 class="text-primary">Skills</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for skill in resume.skills %}
+                            <span class="badge bg-secondary">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <h5 class="text-primary mt-3">Links</h5>
+                        <p>
+                            {% if resume.linkedin %}
+                            <strong>LinkedIn:</strong> 
+                            <a href="{{ resume.linkedin }}" target="_blank" class="text-decoration-none">{{ resume.linkedin }}</a><br>
+                            {% endif %}
+                            {% if resume.portfolio %}
+                            <strong>Portfolio:</strong> 
+                            <a href="{{ resume.portfolio }}" target="_blank" class="text-decoration-none">{{ resume.portfolio }}</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    </section>
-
-    <section class="mb-5">
-        <h2 class="text-uppercase border-bottom pb-2">Work Experience</h2>
-        <ul class="list-unstyled">
-            <li class="mb-3">
-                <strong>Job Title</strong> - <em>Company Name</em> (Month/Year - Present)
-                <p class="text-muted">Describe your responsibilities and achievements in this role.</p>
-            </li>
-            <li class="mb-3">
-                <strong>Job Title</strong> - <em>Company Name</em> (Month/Year - Month/Year)
-                <p class="text-muted">Describe your responsibilities and achievements in this role.</p>
-            </li>
-        </ul>
-    </section>
-
-    <section class="mb-5">
-        <h2 class="text-uppercase border-bottom pb-2">Education</h2>
-        <ul class="list-unstyled">
-            <li>
-                <strong>Degree</strong> - <em>University Name</em> (Month/Year - Month/Year)
-            </li>
-        </ul>
-    </section>
-
-    <section class="mb-5">
-        <h2 class="text-uppercase border-bottom pb-2">Projects</h2>
-        <ul class="list-unstyled">
-            <li class="mb-3">
-                <strong>Project Name</strong>
-                <p class="text-muted">A brief description of the project and its outcomes.</p>
-            </li>
-        </ul>
-    </section>
-
-    <section>
-        <h2 class="text-uppercase border-bottom pb-2">Volunteer Experience</h2>
-        <ul class="list-unstyled">
-            <li>
-                <strong>Role</strong> - <em>Organization Name</em> (Month/Year - Month/Year)
-                <p class="text-muted">Describe your contributions and achievements.</p>
-            </li>
-        </ul>
-    </section>
+    {% else %}
+        <div class="alert alert-warning text-center" role="alert">
+            No resumes found.
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

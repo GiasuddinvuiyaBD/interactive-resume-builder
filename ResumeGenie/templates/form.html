@@ -60,15 +60,22 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="col">
+                <!-- <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="country" name="country"  placeholder="Country: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
-                </div>
+                </div> 
                 <div class="col">
                     <div class="form-group mb-4">
                         <input class="form-control" id="city" name="city"  placeholder="City: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                -->
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="address" name="address"  placeholder="Address: " type="text">
                         <small class="form-text text-muted"></small>
                     </div>
                 </div>
@@ -88,7 +95,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group mb-4">
+                    <div class="col">
+                        <textarea class="form-control" name="professional-summary" id="professional-summary" rows="3" cols="75" placeholder="Enter your professional summary here..."></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!-- Education  -->
         <div class="education-section">
             <label id="resume-label">Education:</label>
