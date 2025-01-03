@@ -5,7 +5,7 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, session, request, jsonify
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import apology
+from helpers import apology , login_required
 from sqlite3 import IntegrityError
 # configure application
 app = Flask(__name__)
@@ -32,13 +32,23 @@ def after_request(response):
 
 @app.route("/")
 def home():
+
     return render_template("home.html")
 
+@app.route("/dashbord")
+def dashbord():
+    return render_template("dashbord.html")
+
 @app.route("/resume", methods=["GET"])
+@login_required
 def resume():
     try:
+        user_id = session["user_id"]
+        print(user_id)
+        
         # Fetch all resumes from the database
-        resumes = db.execute("SELECT * FROM resumes_")
+        resumes = db.execute("SELECT * FROM resumes WHERE user_id = ?", user_id)
+
         
         # Process JSON fields for proper rendering in the UI
         for resume in resumes:
@@ -58,9 +68,8 @@ def resume():
         return render_template("resume.html", resumes=[])
 
 
-
-
 @app.route("/form", methods=["GET", "POST"])
+@login_required
 def form():
 
     errors = {}
@@ -80,6 +89,8 @@ def form():
         degrees = request.form.getlist("degree")
         institutions = request.form.getlist("institution")
         years = request.form.getlist("year")
+
+        user_id = session["user_id"]
 
         #  
         education = [
@@ -130,7 +141,7 @@ def form():
 
         # Insert into the database
         try:
-            db.execute("INSERT INTO resumes_ (title, name, email, phone,  address, linkedin, portfolio,professional_summary, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", title, name, email, phone, address, linkedin, portfolio or "", professional_summary, json.dumps(education), json.dumps(work_experience), json.dumps(skills))
+            db.execute("INSERT INTO resumes (user_id, title, name, email, phone,  address, linkedin, portfolio,professional_summary, education, work_experience, skills) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", user_id, title, name, email, phone, address, linkedin, portfolio or "", professional_summary, json.dumps(education), json.dumps(work_experience), json.dumps(skills))
             
             flash("Resume submitted successfully!")
             return redirect("/resume")

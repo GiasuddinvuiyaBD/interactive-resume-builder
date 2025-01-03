@@ -12,7 +12,9 @@
     <p class="lead text-muted">
         Easily create resumes to stand out using Resume Genie, the quick and easy platform for generating resumes. Choose from thousands of customizable templates to get started.
     </p>
+    {% if session["user_id"] %}
     <a href="{{ url_for('form') }}" class="btn btn-primary btn-lg rounded-pill px-5">Create now</a>
+    {% endif %}
 </div>
 {% endblock %}
 

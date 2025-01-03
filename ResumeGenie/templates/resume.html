@@ -1,69 +1,79 @@
 {% extends "layout.html" %}
 
-{% block title %}Resumes{% endblock %}
+{% block title %}Professional Resumes{% endblock %}
 
 {% block main %}
-<div class="container mt-5">
-    <h1 class="text-center mb-4 text-primary">Resumes</h1>
+<div class="container my-5">
+    <h1 class="text-center mb-4 text-primary fw-bold">Resumes</h1>
 
     {% if resumes %}
-        <div class="row">
+        <div class="row g-4">
             {% for resume in resumes %}
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-1">{{ resume.name }}</h4>
+            <div class="col-lg-6 col-md-12">
+                <div class="card resume-card shadow-lg border-0">
+                    <div class="card-header bg-gradient-primary text-white">
+                        <h4 class="mb-0">{{ resume.name }}</h4>
                         <small class="text-light">{{ resume.title }}</small>
                     </div>
                     <div class="card-body">
-                        <div class="mb-3">
+                        <div class="resume-section">
                             <p>
                                 <strong>Email:</strong> 
-                                <a href="mailto:{{ resume.email }}" class="text-decoration-none">{{ resume.email }}</a><br>
+                                <a href="mailto:{{ resume.email }}" class="text-decoration-none text-primary">{{ resume.email }}</a><br>
                                 <strong>Phone:</strong> {{ resume.phone }}<br>
                                 <strong>Address:</strong> {{ resume.address }}
                             </p>
                         </div>
 
-                        <h5 class="text-primary">Professional Summary</h5>
-                        <p>{{ resume.professional_summary }}</p>
-
-                        <h5 class="text-primary">Education</h5>
-                        <ul class="list-unstyled">
-                            {% for edu in resume.education %}
-                            <li>
-                                <strong>{{ edu.degree }}</strong> - {{ edu.institution }} ({{ edu.year }})
-                            </li>
-                            {% endfor %}
-                        </ul>
-
-                        <h5 class="text-primary">Work Experience</h5>
-                        <ul class="list-unstyled">
-                            {% for work in resume.work_experience %}
-                            <li>
-                                <strong>{{ work.role }}</strong> at {{ work.company }} ({{ work.year }})
-                            </li>
-                            {% endfor %}
-                        </ul>
-
-                        <h5 class="text-primary">Skills</h5>
-                        <div class="d-flex flex-wrap gap-2">
-                            {% for skill in resume.skills %}
-                            <span class="badge bg-secondary">{{ skill }}</span>
-                            {% endfor %}
+                        <div class="resume-section">
+                            <h5 class="section-title">Professional Summary</h5>
+                            <p>{{ resume.professional_summary }}</p>
                         </div>
 
-                        <h5 class="text-primary mt-3">Links</h5>
-                        <p>
-                            {% if resume.linkedin %}
-                            <strong>LinkedIn:</strong> 
-                            <a href="{{ resume.linkedin }}" target="_blank" class="text-decoration-none">{{ resume.linkedin }}</a><br>
-                            {% endif %}
-                            {% if resume.portfolio %}
-                            <strong>Portfolio:</strong> 
-                            <a href="{{ resume.portfolio }}" target="_blank" class="text-decoration-none">{{ resume.portfolio }}</a>
-                            {% endif %}
-                        </p>
+                        <div class="resume-section">
+                            <h5 class="section-title">Education</h5>
+                            <ul class="list-unstyled">
+                                {% for edu in resume.education %}
+                                <li>
+                                    <strong>{{ edu.degree }}</strong> - {{ edu.institution }} ({{ edu.year }})
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="resume-section">
+                            <h5 class="section-title">Work Experience</h5>
+                            <ul class="list-unstyled">
+                                {% for work in resume.work_experience %}
+                                <li>
+                                    <strong>{{ work.role }}</strong> at {{ work.company }} ({{ work.year }})
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="resume-section">
+                            <h5 class="section-title">Skills</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                {% for skill in resume.skills %}
+                                <span class="badge bg-primary text-white">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h5 class="section-title">Links</h5>
+                            <p>
+                                {% if resume.linkedin %}
+                                <strong>LinkedIn:</strong> 
+                                <a href="{{ resume.linkedin }}" target="_blank" class="text-decoration-none text-primary">{{ resume.linkedin }}</a><br>
+                                {% endif %}
+                                {% if resume.portfolio %}
+                                <strong>Portfolio:</strong> 
+                                <a href="{{ resume.portfolio }}" target="_blank" class="text-decoration-none text-primary">{{ resume.portfolio }}</a>
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,3 +86,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
