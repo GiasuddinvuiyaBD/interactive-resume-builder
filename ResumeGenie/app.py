@@ -1,12 +1,14 @@
 
 import re 
 import json
+import pdfkit
 from cs50 import SQL 
-from flask import Flask, flash, redirect, render_template, session, request, jsonify
+from flask import Flask, flash, redirect, render_template, session, request, jsonify, url_for, send_file
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology , login_required
 from sqlite3 import IntegrityError
+
 # configure application
 app = Flask(__name__)
 
@@ -67,6 +69,47 @@ def resume():
         flash("An error occurred while fetching resumes.")
         return render_template("resume.html", resumes=[])
 
+
+
+@app.route("/resume/pdf/<int:resume_id>")
+@login_required
+def download_pdf(resume_id):
+    """Generate a PDF for a specific resume"""
+    try:
+        user_id = session["user_id"]
+        # Fetch the specific resume
+        resume = db.execute("SELECT * FROM resumes WHERE id = ? AND user_id = ?", resume_id, user_id)
+        if not resume:
+            flash("Resume not found.")
+            return redirect("/resume")
+
+        resume = resume[0]
+        resume['education'] = json.loads(resume['education']) if resume['education'] else []
+        resume['work_experience'] = json.loads(resume['work_experience']) if resume['work_experience'] else []
+        resume['skills'] = json.loads(resume['skills']) if resume['skills'] else []
+
+        # Render the resume to an HTML template
+        rendered_html = render_template("resume_pdf_template.html", resume=resume)
+
+        # Configure PDFKit
+        pdfkit_options = {
+            "enable-local-file-access": True
+        }
+        pdf = pdfkit.from_string(rendered_html, False, options=pdfkit_options)
+
+        # Return PDF as a downloadable file
+        response = app.response_class(
+            pdf,
+            mimetype="application/pdf",
+            headers={
+                "Content-Disposition": f"attachment;filename={resume['title']}.pdf"
+            }
+        )
+        return response
+    except Exception as e:
+        app.logger.error(f"Error generating PDF: {e}")
+        flash("An error occurred while generating the PDF.")
+        return redirect("/resume")
 
 @app.route("/form", methods=["GET", "POST"])
 @login_required

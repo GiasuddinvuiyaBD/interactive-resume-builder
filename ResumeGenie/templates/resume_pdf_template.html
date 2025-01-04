@@ -1,14 +1,11 @@
-{% extends "layout.html" %}
 
-{% block title %}Professional Resumes{% endblock %}
 
 {% block main %}
 <div class="container my-5">
     <h1 class="text-center mb-4 text-primary fw-bold">Resumes</h1>
 
-    {% if resumes %}
+    {% if resume %}
         <div class="row g-4">
-            {% for resume in resumes %}
             <div class="col-lg-6 col-md-12">
                 <div class="card resume-card shadow-lg border-0">
                     <div class="card-header bg-gradient-primary text-white">
@@ -75,10 +72,9 @@
                             </p>
                         </div>
                     </div>
-                    <a href="/resume/pdf/{{ resume.id }}" class="btn btn-primary">Download as PDF</a>
+                
                 </div>
             </div>
-            {% endfor %}
         </div>
     {% else %}
         <div class="alert alert-warning text-center" role="alert">
