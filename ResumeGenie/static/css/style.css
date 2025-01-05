@@ -182,25 +182,13 @@ body{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* ===========------------================ */
 /* General Styles */
-body {
+/* body {
     font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
     color: #333;
-}
+} */
 
 /* Resume Card */
 .resume-card {
@@ -245,6 +233,55 @@ a.text-primary:hover {
     font-size: 14px;
     font-weight: 500;
 }
+
+/* resume remove and edit button design */
+.resume-card .btn {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.resume-card:hover .btn {
+    display: inline-block;
+    opacity: 1;
+}
+
+.resume-card {
+    position: relative;
+}
+
+.resume-card .btn {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    display: none;
+    z-index: 10;
+}
+
+.resume-card:hover .btn {
+    display: inline-block;
+}
+
+/* Hide footer buttons by default */
+.resume-card .card-footer .btn {
+    display: none;
+}
+
+/* Show footer buttons on hover */
+.resume-card:hover .card-footer .btn {
+    display: inline-block;
+}
+
+
+.resumeCol .card-footer .btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.resumeCol:hover .card-footer .btn {
+    opacity: 1;
+}
+
 
 /* Responsiveness */
 @media (max-width: 768px) {

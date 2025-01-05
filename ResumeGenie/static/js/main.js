@@ -10,6 +10,23 @@ let educationSection = document.querySelector(".education-section");
 let experience = document.querySelector(".work-experience-section")
 let skills = document.querySelector(".skill-section")
 
+// resume card
+// let resume = document.querySelector("#resumeCard")
+
+let resumeRBtn = document.querySelectorAll("#resumeRemoveBtn")
+let resumeEBtn = document.querySelector("#resumeEditBtn")
+
+
+
+resumeRBtn.forEach((button) =>{
+    button.addEventListener('click',(evt) => {
+        if(evt.target.classList.contains("remove-btn")){
+            evt.target.parentElement.parentElement.remove()
+        }
+    })
+})
+
+
 
 if(registrationBtn){
 registrationBtn.addEventListener("click", (evt) => {

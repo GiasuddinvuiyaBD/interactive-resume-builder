@@ -12,13 +12,16 @@
     {% if resumes %}
         <div class="row g-4">
             {% for resume in resumes %}
-            <div class="col-lg-6 col-md-12">
+            
+            <div class="col-lg-6 col-md-12 resumeCol">
+
                 <div class="card resume-card shadow-lg border-0">
                     <div class="card-header bg-gradient-primary text-white">
                         <h4 class="mb-0">{{ resume.name }}</h4>
                         <small class="text-light">{{ resume.title }}</small>
                     </div>
                     <div class="card-body">
+                        
                         <div class="resume-section">
                             <p>
                                 <strong>Email:</strong> 
@@ -79,6 +82,10 @@
                         </div>
                     </div>
                     <a href="/resume/pdf/{{ resume.id }}" class="btn btn-primary">Download as PDF</a>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-danger mb-1 remove-btn item-{{resume.id}}" id="resumeRemoveBtn">Remove</button>
+                    <button class="btn btn-primary mb-1 edit-btn item-{{resume.id}}" id="resumeEditBtn">Edit</button>
                 </div>
             </div>
             {% endfor %}
