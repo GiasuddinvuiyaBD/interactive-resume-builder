@@ -2,12 +2,12 @@
 
 <head>
     {% block title %}
-        Professional Resumes
+        Professional Template
     {% endblock %}
 </head>
 {% block main %}
 <div class="container my-5">
-    <h1 class="text-center mb-4 text-primary fw-bold">Resumes</h1>
+    <h1 class="text-center mb-4 text-primary fw-bold">Templates</h1>
 
     {% if resumes %}
         <div class="row g-4">
@@ -78,7 +78,7 @@
                             </p>
                         </div>
                     </div>
-                    <a href="/resume/pdf/{{ resume.id }}" class="btn btn-primary">Download as PDF</a>
+                    <!-- <a href="/resume/pdf/{{ resume.id }}" class="btn btn-primary">Download as PDF</a> -->
                 </div>
             </div>
             {% endfor %}

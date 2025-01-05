@@ -46,8 +46,6 @@ def dashbord():
 def resume():
     try:
         user_id = session["user_id"]
-        print(user_id)
-        
         # Fetch all resumes from the database
         resumes = db.execute("SELECT * FROM resumes WHERE user_id = ?", user_id)
 
@@ -61,7 +59,6 @@ def resume():
             if 'skills' in resume and resume['skills']:
                 resume['skills'] = json.loads(resume['skills'])
 
-        print(resume)
         # Pass resumes to the template
         return render_template("resume.html", resumes=resumes)
     except Exception as e:
@@ -232,6 +229,33 @@ def logout():
     # Redirect user to login form
     return redirect("/login")
 
+
+@app.route("/templates", methods=["GET"])
+def templates():
+
+    try:
+        # Fetch all resumes from the database
+        resumes = db.execute("SELECT * FROM resumes")
+        
+        for resume in resumes:
+            if 'education' in resume and resume['education']:
+                resume['education'] = json.loads(resume['education'])
+            if 'work_experience' in resume and resume['work_experience']:
+                resume['work_experience'] = json.loads(resume['work_experience'])
+            if 'skills' in resume and resume['skills']:
+                resume['skills'] = json.loads(resume['skills'])
+
+         # Add template choices dynamically
+        template_s = ['template-1.html', 'template-2.html', 'template-3.html']
+        for i, resume in enumerate(resumes):
+            resume['template'] = template_s[i % len(template_s)]  # Rotate through templates
+
+
+        return render_template('templates.html', resumes=resumes)
+    except Exception as e:
+        app.logger.error(f"Error fetching resumes: {e}") 
+        flash("An error occurred while fetching resumes.")
+        return render_template("templates.html", resumes=[])
 
 @app.route("/register", methods = ["GET","POST"])
 def register():
