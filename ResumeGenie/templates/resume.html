@@ -84,8 +84,25 @@
                     <a href="/resume/pdf/{{ resume.id }}" class="btn btn-primary">Download as PDF</a>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-danger mb-1 remove-btn item-{{resume.id}}" id="resumeRemoveBtn">Remove</button>
-                    <button class="btn btn-primary mb-1 edit-btn item-{{resume.id}}" id="resumeEditBtn">Edit</button>
+                    <!-- <button class="btn btn-danger mb-1 remove-btn /resume/{{resume.id}}" id="resumeRemoveBtn">Remove</button> -->
+                    <button 
+                    class="btn btn-danger mb-1 remove-btn" 
+                    data-resume-id="{{ resume.id }}" 
+                    data-resume-url="/resume/{{ resume.id }}"
+                    id="resumeRemoveBtn"
+                >
+                    Remove
+                </button>
+
+                <!-- data-resume-url="/resume/edit/{{ resume.id }}" -->
+                <button 
+                    class="btn btn-primary mb-1 edit-btn" 
+                    data-resume-id="{{ resume.id }}" 
+                    data-resume-url="/resume/edit/{{ resume.id }}"
+                    id="resumeEditBtn"
+                >
+                    Edit
+                </button>
                 </div>
             </div>
             {% endfor %}

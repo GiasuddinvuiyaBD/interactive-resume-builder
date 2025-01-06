@@ -67,6 +67,25 @@ def resume():
         return render_template("resume.html", resumes=[])
 
 
+# @app.route("/resume/<int:resume_id>")
+@app.route("/resume/<int:resume_id>", methods=["DELETE"])
+@login_required
+def remove_resume(resume_id):
+    """Remove specific resume via AJAX."""
+    try:
+        user_id = session["user_id"]
+        resume = db.execute("SELECT * FROM resumes WHERE id = ? AND user_id = ?", resume_id, user_id)
+
+        if not resume:
+            return jsonify({"error": "Resume not found or permission denied."}), 403
+
+        db.execute("DELETE FROM resumes WHERE id = ? AND user_id = ?", resume_id, user_id)
+        return jsonify({"message": "Resume deleted successfully."}), 200
+
+    except Exception as e:
+        app.logger.error(f"Error deleting resume {resume_id}: {e}")
+        return jsonify({"error": "An error occurred while deleting the resume."}), 500
+
 
 @app.route("/resume/pdf/<int:resume_id>")
 @login_required
@@ -107,6 +126,62 @@ def download_pdf(resume_id):
         app.logger.error(f"Error generating PDF: {e}")
         flash("An error occurred while generating the PDF.")
         return redirect("/resume")
+
+
+@app.route("/resume/edit/<int:resume_id>", methods=["GET", "POST"])
+@login_required
+def edit_resume(resume_id):
+
+    try:
+        # Get the logged-in user's ID
+        user_id = session["user_id"]
+
+        # Fetch the resume from the database
+        resume = db.execute("SELECT * FROM resumes WHERE id = ? AND user_id = ?", resume_id, user_id)
+
+        # Check if the resume exists and belongs to the user
+        if not resume:
+            flash("Resume not found or you don't have permission to edit it.", "warning")
+            return redirect("/resume")
+
+        # If the request method is POST, process the form submission
+        if request.method == "POST":
+            # Extract form data
+            title = request.form.get("title")
+            name = request.form.get("name")
+            email = request.form.get("email")
+            phone = request.form.get("phone")
+            address = request.form.get("address")
+            linkedin = request.form.get("linkedin")
+            portfolio = request.form.get("portfolio")
+            professional_summary = request.form.get("professional-summary")
+
+            # Validate form inputs (Optional)
+            if not title or not name or not email:
+                flash("Title, Name, and Email are required fields.", "danger")
+                return render_template("edit_resume.html", resume=resume[0])
+
+            # Update the resume in the database
+            db.execute(
+                """
+                UPDATE resumes 
+                SET title = ?, name = ?, email = ?, phone = ?, address = ?, linkedin = ?, portfolio = ?, professional_summary = ? 
+                WHERE id = ? AND user_id = ?
+                """,
+                title, name, email, phone, address, linkedin, portfolio, professional_summary, resume_id, user_id
+            )
+
+            flash("Resume updated successfully!", "success")
+            return redirect("/resume")
+
+        # If GET request, render the form with the existing resume details
+        return render_template("edit_resume.html", resume=resume[0])
+
+    except Exception as e:
+        flash(f"An error occurred: {e}", "danger")
+        return redirect("/resume")
+
+    
 
 @app.route("/form", methods=["GET", "POST"])
 @login_required

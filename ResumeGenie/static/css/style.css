@@ -96,7 +96,7 @@ body{
 
 /* -------- Registration From Design Start here --------- */
 
-.register-form, .resume-form{
+.register-form, .resume-form, .edit-form{
     display: flex;
     justify-content: center;
     align-items: center;

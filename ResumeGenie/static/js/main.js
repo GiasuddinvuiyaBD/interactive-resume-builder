@@ -10,21 +10,66 @@ let educationSection = document.querySelector(".education-section");
 let experience = document.querySelector(".work-experience-section")
 let skills = document.querySelector(".skill-section")
 
-// resume card
-// let resume = document.querySelector("#resumeCard")
 
-let resumeRBtn = document.querySelectorAll("#resumeRemoveBtn")
-let resumeEBtn = document.querySelector("#resumeEditBtn")
+// resume card -------------- i will design and structure our code later.
+let resumeRBtn = document.querySelectorAll(".remove-btn");
+let resumeEBtn = document.querySelectorAll(".edit-btn")
+let updateBtn = document.querySelector("#updateBtn")
 
 
+// updateBtn.addEventListener('click',(evt) => {
+//     const updateUrl = button.dataset.resumeUrl;
+//     window.location.href = updateUrl;
+// })
 
-resumeRBtn.forEach((button) =>{
-    button.addEventListener('click',(evt) => {
-        if(evt.target.classList.contains("remove-btn")){
-            evt.target.parentElement.parentElement.remove()
+// Edit resume
+// resumeEBtn.forEach((button) => {
+//     button.addEventListener('click', event => {
+//         // const resumeUrl = button.getAttribute('data-resume-url');
+//         const editUrl = button.dataset.resumeUrl;
+//         window.location.href = editUrl;
+//     });
+// })
+
+
+document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+        const editUrl = button.dataset.resumeUrl;
+        window.location.href = editUrl;
+    });
+});
+
+
+// delete resume
+resumeRBtn.forEach((button) => {
+    button.addEventListener("click", async (evt) => {
+        evt.preventDefault();
+        const resumeId = button.dataset.resumeId;
+        const resumeUrl = button.dataset.resumeUrl;
+
+        if (confirm("Are you sure you want to delete this resume?")) {
+            try {
+                const response = await fetch(resumeUrl, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (response.ok) {
+                    button.closest(".resumeCol").remove(); // Remove from UI
+                    alert("Resume deleted successfully!");
+                } else {
+                    alert("Failed to delete the resume.");
+                }
+            } catch (error) {
+                console.error("Error deleting resume:", error);
+                alert("An error occurred while deleting the resume.");
+            }
         }
-    })
-})
+    });
+});
+
+
+
 
 
 

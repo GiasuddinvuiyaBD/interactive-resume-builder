@@ -1,106 +1,145 @@
-{% extends "layout.html" %}
+<div class="edit-form">
+    <div class="form-container">
 
-<head>
-    {% block title %}
-        Template 2 - Professional Resumes
-    {% endblock %}
-</head>
-{% block main %}
-<div class="container py-5">
-    <h1 class="text-center mb-5 text-dark fw-bold">Explore Professional Resume Templates</h1>
-
-    {% if resumes %}
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            {% for resume in resumes %}
-            <div class="col">
-                <div class="card border-0 shadow-lg h-100">
-                    <!-- Header -->
-                    <div class="card-header bg-dark text-white rounded-top">
-                        <h4 class="fw-bold mb-1">{{ resume.name }}</h4>
-                        <p class="mb-0 small">{{ resume.title }}</p>
+        <h2 class="form-heading">Update Resume</h2>
+        
+        <form action="/resume/edit/{{ resume.id }}" method="post" id="resumeForm">
+            <div class="personal-info-section">
+            <div class="form-group mb-4">
+                <input autocomplete="off" id="title" value="{{ resume.title }}" autofocus class="form-control" name="title" placeholder="Title" type="text">
+                <small class="form-text title-error text-muted"></small>
+               
+            </div>
+            <label id="resume-label">Personal Info:</label>
+            <div class="form-row">
+                <!-- Name and Email Inline -->
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input autocomplete="off" id="name" autofocus class="form-control" name="name" placeholder="Name: " type="text">
+                        <small class="form-text name-error text-muted"></small>
+                        
                     </div>
-
-                    <!-- Body -->
-                    <div class="card-body">
-                        <!-- Contact Section -->
-                        <div class="resume-section mb-4">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Contact</h6>
-                            <ul class="list-unstyled text-muted small mb-0">
-                                <li><i class="bi bi-envelope me-2"></i>
-                                    <a href="mailto:{{ resume.email }}" class="text-decoration-none text-dark">{{ resume.email }}</a>
-                                </li>
-                                <li><i class="bi bi-telephone me-2"></i>{{ resume.phone }}</li>
-                                <li><i class="bi bi-geo-alt me-2"></i>{{ resume.address }}</li>
-                            </ul>
-                        </div>
-
-                        <!-- Professional Summary -->
-                        <div class="resume-section mb-4">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Professional Summary</h6>
-                            <p class="text-muted small">{{ resume.professional_summary }}</p>
-                        </div>
-
-                        <!-- Education Section -->
-                        <div class="resume-section mb-4">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Education</h6>
-                            <ul class="list-unstyled text-muted small">
-                                {% for edu in resume.education %}
-                                <li><strong>{{ edu.degree }}</strong>, {{ edu.institution }} ({{ edu.year }})</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <!-- Work Experience Section -->
-                        <div class="resume-section mb-4">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Work Experience</h6>
-                            <ul class="list-unstyled text-muted small">
-                                {% for work in resume.work_experience %}
-                                <li>
-                                    <strong>{{ work.role }}</strong> at {{ work.company }} 
-                                    <span class="text-muted">({{ work.year }})</span>
-                                    <p class="mb-0 small">{{ work.description }}</p>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <!-- Skills Section -->
-                        <div class="resume-section mb-4">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Skills</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                {% for skill in resume.skills %}
-                                <span class="badge bg-secondary text-light">{{ skill }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <!-- Links Section -->
-                        <div class="resume-section">
-                            <h6 class="text-uppercase text-dark fw-semibold mb-2">Links</h6>
-                            <ul class="list-unstyled text-muted small">
-                                {% if resume.linkedin %}
-                                <li>
-                                    <i class="bi bi-linkedin me-2"></i>
-                                    <a href="{{ resume.linkedin }}" target="_blank" class="text-decoration-none text-dark">{{ resume.linkedin }}</a>
-                                </li>
-                                {% endif %}
-                                {% if resume.portfolio %}
-                                <li>
-                                    <i class="bi bi-globe me-2"></i>
-                                    <a href="{{ resume.portfolio }}" target="_blank" class="text-decoration-none text-dark">{{ resume.portfolio }}</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input autocomplete="off" id="email" class="form-control" name="email_"  placeholder="Email: " type="text">
+                        <small class="form-text email-error text-muted"></small>
+                       
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            <div class="form-row">
+                <!-- phone country  and city Inline -->
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="phone" name="phone" placeholder="Phone: " type="phone">
+                        <small class="form-text phone-error text-muted"></small>
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="address" name="address"  placeholder="Address: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <!-- linkedin and protfolio -->
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="portfolio" name="portfolio" placeholder="Portfolio: " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group mb-4">
+                    <div class="col">
+                        <textarea class="form-control" name="professional-summary" id="professional-summary" rows="3" cols="75" placeholder="Enter your professional summary here..."></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% else %}
-        <div class="alert alert-warning text-center mt-4" role="alert">
-            No resumes found. Please add resumes to explore.
+
+        <!-- Education  -->
+        <div class="education-section">
+            <label id="resume-label">Education:</label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="degree" name="degree"  placeholder="Degree: " type="text">
+                        <small class="error form-text degree-error text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="institution" name="institution" placeholder="Institution: " type="text">
+                        <small class="error form-text institution-error text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="year" name="year" placeholder="Year: " type="text">
+                        <small class="error form-text year-error  text-muted"> </small>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="educationBtn">Add More</button>
         </div>
-    {% endif %}
+    
+            
+        <!-- work experience -->
+            <div class="work-experience-section">
+            <label id="resume-label">Work Experience: </label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="role" name="role" placeholder="Role: " type="text">
+                        <small class="form-text role-error text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="company" name="company" placeholder="Company: " type="text">
+                        <small class="form-text company-error text-muted"></small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-5">
+                        <input class="form-control" id="work_year" name="work_year" placeholder="Year: " type="text">
+                        <small class="form-text dueYear-error text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="experienceBtn">Add More</button>
+            </div>
+
+            <!-- skills -->
+            <div class="skill-section">
+            <label id="resume-label">Skills: </label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="skill" name="skill" placeholder="Write you skills " type="text">
+                        <small class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-2" id="skillsBtn">Add More Skills</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/resume" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 </div>
-{% endblock %}
