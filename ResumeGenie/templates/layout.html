@@ -13,6 +13,8 @@
     <link href="" rel="icon">
 
     <link href="../static/css/style.css" rel="stylesheet">
+    <!-- Specific css linkup -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>ResumeGenie : {% block title %}{% endblock %}</title>
 
 </head>
@@ -62,6 +64,9 @@
     <footer class="mb-5">
         <!-- <h2>Footer Section</h2> -->
     </footer>
+    
     <script src="../static/js/main.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
 </body>
 </html>

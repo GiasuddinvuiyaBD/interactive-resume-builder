@@ -5,6 +5,157 @@
 {% endblock %}
 
 {% block main %}
-    <h2>Updated Resume</h2> 
+    <div class="edit-form">
+        <div class="form-container">
+    
+            <h2 class="form-heading">Update Resume</h2>
+            
+            <form action="/resume/edit/{{ resume.id }}" method="post" id="resumeForm">
+                <div class="personal-info-section">
+                <div class="form-group mb-4">
+                    <input autocomplete="off" id="title" value="{{ resume.title }}" autofocus class="form-control" name="title" placeholder="Title" type="text">
+                    <small class="form-text title-error text-muted"></small>
+                   
+                </div>
+                <label id="resume-label">Personal Info:</label>
+                <div class="form-row">
+                    <!-- Name and Email Inline -->
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input autocomplete="off" id="name" value="{{ resume.name }}" autofocus class="form-control" name="name" placeholder="Name: " type="text">
+                            <small class="form-text name-error text-muted"></small>
+                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input autocomplete="off" id="email" value="{{ resume.email }}"  class="form-control" name="email"  placeholder="Email: " type="text">
+                            <small class="form-text email-error text-muted"></small>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- phone country  and city Inline -->
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" id="phone" value="{{ resume.phone }}" name="phone" placeholder="Phone: " type="phone">
+                            <small class="form-text phone-error text-muted"></small>
+                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" id="address" value="{{ resume.address }}" name="address"  placeholder="Address: " type="text">
+                            <small class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <!-- linkedin and protfolio -->
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" id="linkedin" value="{{ resume.linkedin }}" name="linkedin" placeholder="Linkedin: " type="text">
+                            <small class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" id="portfolio" value="{{ resume.portfolio }}" name="portfolio" placeholder="Portfolio: " type="text">
+                            <small class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group mb-4">
+                        <div class="col">
+                            <textarea class="form-control" name="professional-summary" id="professional-summary" value="{{ resume.professional_summary }}" rows="3" cols="75" placeholder="Enter your professional summary here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Education  -->
+            <div class="education-section">
+                <label id="resume-label">Education:</label>
+                {% for edu in resume.education %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" value="{{ edu.degree }}" id="degree" name="degree"  placeholder="Degree: " type="text">
+                            <small class="error form-text degree-error text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" value="{{ edu.institution }}"  id="institution" name="institution" placeholder="Institution: " type="text">
+                            <small class="error form-text institution-error text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <input class="form-control" value="{{ edu.year }}" id="year" name="year" placeholder="Year: " type="text">
+                            <small class="error form-text year-error  text-muted"> </small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="educationBtn">Add More</button>
+            </div>
+        
+                
+            <!-- work experience -->
+                <div class="work-experience-section">
+                <label id="resume-label">Work Experience: </label>
+                {% for work_exp in resume.work_experience %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group mb-5">
+                            <input class="form-control" value="{{ work_exp.role }}" id="role" name="role" placeholder="Role: " type="text">
+                            <small class="form-text role-error text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-5">
+                            <input class="form-control" value="{{ work_exp.company }}" id="company" name="company" placeholder="Company: " type="text">
+                            <small class="form-text company-error text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-5">
+                            <input class="form-control" value="{{ work_exp.work_year }}" id="work_year" name="work_year" placeholder="Year: " type="text">
+                            <small class="form-text dueYear-error text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="button" class="btn btn-sm btn-outline-primary mb-4" id="experienceBtn">Add More</button>
+                </div>
+    
+                <!-- skills -->
+                <div class="skill-section">
+                    <label id="resume-label">Skills: </label>
+                    {% for skill in resume.skills %}
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <input class="form-control" id="skill" name="skill" value="{{ skill }}" placeholder="Write your skills" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <button type="button" class="btn btn-sm btn-outline-primary mb-2" id="skillsBtn">Add More Skills</button>
+                </div>
+                
+    
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/resume" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
 

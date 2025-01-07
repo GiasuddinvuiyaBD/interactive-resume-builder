@@ -143,6 +143,13 @@ def edit_resume(resume_id):
         if not resume:
             flash("Resume not found or you don't have permission to edit it.", "warning")
             return redirect("/resume")
+        
+        # Decode JSON fields (assuming education, work_experience, skills are stored as JSON)
+        resume = resume[0]
+        resume["education"] = json.loads(resume["education"]) if resume.get("education") else []
+        resume["work_experience"] = json.loads(resume["work_experience"]) if resume.get("work_experience") else []
+        resume["skills"] = json.loads(resume["skills"]) if resume.get("skills") else []
+
 
         # If the request method is POST, process the form submission
         if request.method == "POST":
@@ -156,6 +163,32 @@ def edit_resume(resume_id):
             portfolio = request.form.get("portfolio")
             professional_summary = request.form.get("professional-summary")
 
+
+
+            # Extract education, work experience, and skills
+            degrees = request.form.getlist("degree")
+            institutions = request.form.getlist("institution")
+            years = request.form.getlist("year")
+
+            user_id = session["user_id"]
+
+            #  
+            education = [
+                {"degree": degree.strip(), "institution": institution.strip(), "year": year.strip()}
+                for degree, institution, year in zip(degrees, institutions, years)
+            ]
+
+            work_experience = [
+                {"role": role.strip(), "company": company.strip(), "year": work_year.strip()}
+                for role, company, work_year in zip(
+                    request.form.getlist("role"),
+                    request.form.getlist("company"),
+                    request.form.getlist("work_year")
+                )
+            ]
+
+            skills = [skill.strip() for skill in request.form.getlist("skill")]
+
             # Validate form inputs (Optional)
             if not title or not name or not email:
                 flash("Title, Name, and Email are required fields.", "danger")
@@ -165,17 +198,17 @@ def edit_resume(resume_id):
             db.execute(
                 """
                 UPDATE resumes 
-                SET title = ?, name = ?, email = ?, phone = ?, address = ?, linkedin = ?, portfolio = ?, professional_summary = ? 
+                SET title = ?, name = ?, email = ?, phone = ?, address = ?, linkedin = ?, portfolio = ?, professional_summary = ? , education = ?, work_experience = ?, skills = ?
                 WHERE id = ? AND user_id = ?
                 """,
-                title, name, email, phone, address, linkedin, portfolio, professional_summary, resume_id, user_id
+                title, name, email, phone, address, linkedin, portfolio, professional_summary, json.dumps(education), json.dumps(work_experience), json.dumps(skills), resume_id, user_id
             )
 
             flash("Resume updated successfully!", "success")
             return redirect("/resume")
 
         # If GET request, render the form with the existing resume details
-        return render_template("edit_resume.html", resume=resume[0])
+        return render_template("edit_resume.html", resume=resume)
 
     except Exception as e:
         flash(f"An error occurred: {e}", "danger")
