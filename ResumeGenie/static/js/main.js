@@ -1,9 +1,50 @@
 
+// RESUME EDIT OR UPDATE FUNCTIONALITY
+document.querySelectorAll(".edit-btn").forEach((button) => {
+    button.addEventListener("click", (event) => {
+        console.log("Edit button is clicked")
+        const editUrl = button.dataset.resumeUrl;
+        window.location.href = editUrl;
+    });
+});
+
+
+// RESUME DELETE OR REMOVE FUNCTIONALITY
+document.querySelectorAll(".remove-btn").forEach((button) => {
+    button.addEventListener("click", async (evt) => {
+        console.log("remove button is clicked")
+        evt.preventDefault();
+        const resumeId = button.dataset.resumeId;
+        const resumeUrl = button.dataset.resumeUrl;
+
+        if (confirm("Are you sure you want to delete this resume?")) {
+            try {
+                const response = await fetch(resumeUrl, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (response.ok) {
+                    button.closest(".resumeCol").remove(); // Remove from UI
+                    alert("Resume deleted successfully!");
+                } else {
+                    alert("Failed to delete the resume.");
+                }
+            } catch (error) {
+                console.error("Error deleting resume:", error);
+                alert("An error occurred while deleting the resume.");
+            }
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', evt => {
 
 
 let registrationBtn = document.querySelector("#submitBtn")
 let loginBtn = document.querySelector("#loginBtn")
-let resumeBtn = document.querySelector("#resumeBtn")
+let resumeCreateBtn = document.querySelector("#resumeCreateBtn")
 
 // RESUME FIELD SELECTOR
 let addEductionFieldBtn = document.querySelector("#educationBtn")
@@ -16,7 +57,7 @@ let skills = document.querySelector(".skill-section")
 
 // RESUME CARD OR PAGES BUTTON SELECTOR
 let resumeRBtn = document.querySelectorAll(".remove-btn");
-let resumeEBtn = document.querySelectorAll(".edit-btn")
+let resumeEBtn = document.querySelectorAll(".card-footer")
 let updateBtn = document.querySelector("#updateBtn")
 
 
@@ -74,6 +115,50 @@ const errorSelectors = {
     yearError: document.querySelector(".year-error"),
     finalMessage : document.querySelector(".form-validation-fail")
 };
+
+
+
+/* RESUME EDIT OR UPDATE FUNCTIONALITY =================      I will work here later for edit and delete resume
+resumeEBtn.forEach((button) => {
+    button.addEventListener("click", (evt) => {
+        if(evt.target.matches('edit-btn')){
+            const editUrl = button.dataset.resumeUrl;
+            window.location.href = editUrl;
+        }
+    });
+});
+
+
+// RESUME DELETE OR REMOVE FUNCTIONALITY
+resumeRBtn.forEach((button) => {
+    button.addEventListener("click", async (evt) => {
+        console.log("remove button is clicked")
+        evt.preventDefault();
+        const resumeId = button.dataset.resumeId;
+        const resumeUrl = button.dataset.resumeUrl;
+
+        if (confirm("Are you sure you want to delete this resume?")) {
+            try {
+                const response = await fetch(resumeUrl, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (response.ok) {
+                    button.closest(".resumeCol").remove(); // Remove from UI
+                    alert("Resume deleted successfully!");
+                } else {
+                    alert("Failed to delete the resume.");
+                }
+            } catch (error) {
+                console.error("Error deleting resume:", error);
+                alert("An error occurred while deleting the resume.");
+            }
+        }
+    });
+});
+
+*/
 
 // VALIDATE REGISTRATION FORM
 if(registrationBtn){
@@ -173,7 +258,7 @@ if(registrationBtn){
             evt.preventDefault()
         }
     })
-    }
+}
         
 // VALIDATE LOGIN FORM
 if(loginBtn){
@@ -205,12 +290,13 @@ loginBtn.addEventListener('click', (evt) => {
     if(errors) evt.preventDefault();
 })
 }  
-    
+
+// ---------- LOGIN AND REGISTRATION IS WORKING ------------
 
 
 // VALIDATE RESUME FORM
-if(resumeBtn){
-    resumeBtn.addEventListener('click', (evt) => {
+if(resumeCreateBtn){
+    resumeCreateBtn.addEventListener('click', (evt) => {
 
         // Track validation state
         let errors = false;
@@ -255,44 +341,8 @@ if(resumeBtn){
     })
 }
 
-// RESUME EDIT OR UPDATE FUNCTIONALITY
-resumeEBtn.forEach((button) => {
-    button.addEventListener("click", (event) => {
-        console.log("Edit button is clicked")
-        const editUrl = button.dataset.resumeUrl;
-        window.location.href = editUrl;
-    });
-});
 
 
-// RESUME DELETE OR REMOVE FUNCTIONALITY
-resumeRBtn.forEach((button) => {
-    button.addEventListener("click", async (evt) => {
-        console.log("remove button is clicked")
-        evt.preventDefault();
-        const resumeId = button.dataset.resumeId;
-        const resumeUrl = button.dataset.resumeUrl;
-
-        if (confirm("Are you sure you want to delete this resume?")) {
-            try {
-                const response = await fetch(resumeUrl, {
-                    method: "DELETE",
-                    headers: { "Content-Type": "application/json" },
-                });
-
-                if (response.ok) {
-                    button.closest(".resumeCol").remove(); // Remove from UI
-                    alert("Resume deleted successfully!");
-                } else {
-                    alert("Failed to delete the resume.");
-                }
-            } catch (error) {
-                console.error("Error deleting resume:", error);
-                alert("An error occurred while deleting the resume.");
-            }
-        }
-    });
-});
 
 
 
@@ -405,8 +455,7 @@ skills.addEventListener("click", (evt) =>{
 })
 }
     
-let test = document.querySelectorAll("#resumeEditBtn")
-console.log(test, 'testing')
 
 
+})
 
