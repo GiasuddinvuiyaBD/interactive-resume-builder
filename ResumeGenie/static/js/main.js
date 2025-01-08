@@ -19,6 +19,7 @@ let resumeRBtn = document.querySelectorAll(".remove-btn");
 let resumeEBtn = document.querySelectorAll(".edit-btn")
 let updateBtn = document.querySelector("#updateBtn")
 
+
 // SELECT FIELD FOR RESUME FORM 
 const fields = {
     personal: {
@@ -45,22 +46,22 @@ const fields = {
 
     
 // DEFAULT VALUE FOR RESUME FORM
-if (!fields.personal.title.value)  "Software Engineer";
-if (!fields.personal.name.value) "Gias uddin vuiya";
-if (!fields.personal.email.value) "giasuddin_harvard@gmail.com";
-if (!fields.personal.phone.value) "01210001337";
-if (!fields.personal.address.value) "Dhaka Bangladesh";
-if (!fields.personal.professionalSummary.value) "A concise overview of your career highlights, key skills, and what you bring to the role.";
-if (!fields.personal.linkedin.value) "https://www.linkedin.com/in/brian-yu/";
-if (!fields.personal.portfolio.value) "https://www.protfolio.com";
+if (!fields.personal.title.value) fields.personal.title.value =  "Software Engineer";
+if (!fields.personal.name.value) fields.personal.name.value = "Gias uddin vuiya";
+if (!fields.personal.email.value) fields.personal.email.value = "giasuddin_harvard@gmail.com";
+if (!fields.personal.phone.value) fields.personal.phone.value = "01210001337";
+if (!fields.personal.address.value) fields.personal.address.value = "Dhaka Bangladesh";
+if (!fields.personal.professionalSummary.value) fields.personal.professionalSummary.value = "A concise overview of your career highlights, key skills, and what you bring to the role.";
+if (!fields.personal.linkedin.value) fields.personal.linkedin.value = "https://www.linkedin.com/in/brian-yu/";
+if (!fields.personal.portfolio.value) fields.personal.portfolio.value = "https://www.protfolio.com";
 
-if (!fields.education.degree.value) "CSE";
-if (!fields.education.institution.value) "Harvard";
-if (!fields.education.year.value)"2024";
+if (!fields.education.degree.value) fields.education.degree.value = "CSE";
+if (!fields.education.institution.value) fields.education.institution.value = "Harvard";
+if (!fields.education.year.value) fields.education.year.value = "2024";
 
-if (!fields.experience.role.value ) "Engineer";
-if (!fields.experience.company.value) "Microsoft";
-if (!fields.experience.work_year.value) "2023";
+if (!fields.experience.role.value ) fields.experience.role.value = "Engineer";
+if (!fields.experience.company.value) fields.experience.company.value = "Microsoft";
+if (!fields.experience.work_year.value) fields.experience.work_year.value = "2023";
 
 // ERROR MESSAGE SELECTORS
 const errorSelectors = {
@@ -210,7 +211,7 @@ loginBtn.addEventListener('click', (evt) => {
 // VALIDATE RESUME FORM
 if(resumeBtn){
     resumeBtn.addEventListener('click', (evt) => {
-    
+
         // Track validation state
         let errors = false;
         // Validation helpers
@@ -255,16 +256,19 @@ if(resumeBtn){
 }
 
 // RESUME EDIT OR UPDATE FUNCTIONALITY
-document.querySelectorAll(".edit-btn").forEach((button) => {
+resumeEBtn.forEach((button) => {
     button.addEventListener("click", (event) => {
+        console.log("Edit button is clicked")
         const editUrl = button.dataset.resumeUrl;
         window.location.href = editUrl;
     });
 });
 
+
 // RESUME DELETE OR REMOVE FUNCTIONALITY
 resumeRBtn.forEach((button) => {
     button.addEventListener("click", async (evt) => {
+        console.log("remove button is clicked")
         evt.preventDefault();
         const resumeId = button.dataset.resumeId;
         const resumeUrl = button.dataset.resumeUrl;
@@ -401,5 +405,8 @@ skills.addEventListener("click", (evt) =>{
 })
 }
     
+let test = document.querySelectorAll("#resumeEditBtn")
+console.log(test, 'testing')
 
-    
+
+
