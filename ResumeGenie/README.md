@@ -21,7 +21,18 @@
 
 ---
 
-## 🌐 Live Link
+## 💻 Technologies Used
+
+| **Category**     | **Technologies**                                     |
+|-------------------|-----------------------------------------------------|
+| **Backend**      | Python, Flask                                       |
+| **Frontend**     | HTML, CSS, JavaScript, Bootstrap                    |
+| **Database**     | SQLite                                             |
+| **Other Tools**  | JSON for structured data storage, Flask sessions for user management |
+
+---
+
+## 🌐 Video link
 Check out the live application here: link share here
 
 ---
@@ -33,31 +44,19 @@ Check out the live application here: link share here
 ### Mobile View
 ![Mobile View](path/to/mobile-screenshot.png)
 
+
 ---
 
 ## Features
-- 🖋️ **User Authentication:**: Choose from modern, creative, or minimalist designs.
+- 🔐 **User Authentication:**: Choose from modern, creative, or minimalist designs.
 - 🛠️ **User-Friendly Interface**: Fill in your details with a guided form.
 - 📤 **Export Options**: Download your resume as a PDF or share it online.
 - 🌐 **Responsive Design**: Optimized for desktop and mobile devices.
 - 💾 **sqlite3**: Save your progress and resume drafts.
-- 💾 **Resume Management**: Create, edit, and store multiple resumes.
-- 💾 **JSON Data Storage**: Save complex data such as education, work experience and skills in a structured format.
-- 💾 **Mobile-Friendly Design**: Fully responsive UI for all devices.
-- 💾 **Error Handling**: Friendly error messages and form validation.
-
-
---- 
-
-
-## 💻 Technologies Used
-
-| **Category**     | **Technologies**                                     |
-|-------------------|-----------------------------------------------------|
-| **Backend**      | Python, Flask                                       |
-| **Frontend**     | HTML, CSS, JavaScript, Bootstrap                    |
-| **Database**     | SQLite                                             |
-| **Other Tools**  | JSON for structured data storage, Flask sessions for user management |
+- 📂 **Resume Management**: Create, edit, and store multiple resumes.
+- 🗂️ **JSON Data Storage**: Save complex data such as education, work experience and skills in a structured format.
+- 📱 **Mobile-Friendly Design**: Fully responsive UI for all devices.
+- ⚠️ **Error Handling**: Friendly error messages and form validation.
 
 
 --- 
@@ -181,9 +180,7 @@ Special thanks to:
 
 - **CS50x Team**: For providing an excellent introduction to computer science and inspiring me to create this project as my final submission.
 - **David J. Malan and the Harvard CS50 Team**: For the engaging lectures, problem sets, and invaluable learning resources.
-
 - **Family and Friends**: For their encouragement and support throughout the development of this project.
-
 - **Flask Documentation**, **SQLite Community**, **Bootstrap Framework**, and **OpenAI** for their invaluable tools and resources that supported the development of this project.
 
 --- 
