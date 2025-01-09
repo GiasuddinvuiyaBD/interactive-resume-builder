@@ -41,8 +41,8 @@ Check out the live application here: link share here
 
 | Device  | Screenshot                                                                                   |
 |---------|---------------------------------------------------------------------------------------------|
-| Mobile  | ![Mobile View](../ResumeGenie/static/images/mobile-view.png)                                 |
-| Desktop | ![Desktop View](../ResumeGenie/static/images/desktop-view.png)                               |
+| Mobile  | ![Mobile View](/ResumeGenie/static/images/mobile-view.png)                         |
+| Desktop | ![Desktop View](/ResumeGenie/static/images/desktop-view.png)                               |
 
 ---
 
