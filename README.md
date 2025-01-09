@@ -124,19 +124,19 @@ The application will be available at `http://127.0.0.1:5000`.
     - Download your resume as a PDF or print it directly from the browser.
 
 ---
-## Project Structure
+##  🗂️ Project Structure
 
 ```base 
 resume-genie/ 
-├── app.py # Main application logic 
-├── templates/ # HTML templates 
-├── static/ # CSS, JS, and image files 
-├── database/ # SQLite database 
-├── requirements.txt # Python dependencies 
-└── README.md # Project documentation
+├── 📁 app.py # Main application logic 
+├── 📁 templates/ # HTML templates 
+├── 📁 static/ # CSS, JS, and image files 
+├── 🗄️ database/ # SQLite database 
+├── 📄 requirements.txt # Python dependencies 
+└── 📄 README.md # Project documentation
 ```
 
-## Future Enhancements
+## 🚀 Future Enhancements
 
 - Add real-time resume preview functionality.
 
@@ -147,7 +147,7 @@ resume-genie/
 - Introduce AI-based suggestions for resume improvement.
 
 
-## Contributing
+##  🤝 Contributing
 Contributions are welcome! If you'd like to contribute, please:
 
 1. Fork the repository.
@@ -182,5 +182,5 @@ Special thanks to:
 - **Flask Documentation**, **SQLite Community**, **Bootstrap Framework**, and **OpenAI** for their invaluable tools and resources that supported the development of this project.
 
 --- 
-## License
+## 📜✨ License 
 This project is licensed under the MIT License.
