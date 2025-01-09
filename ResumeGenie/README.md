@@ -38,12 +38,11 @@ Check out the live application here: link share here
 ---
 
 ## 📸 Screenshots
-### Desktop View
-![Desktop View]()
 
-### Mobile View
-![Mobile View](path/to/mobile-screenshot.png)
-
+| Device  | Screenshot                                                                                   |
+|---------|---------------------------------------------------------------------------------------------|
+| Mobile  | ![Mobile View](../ResumeGenie/static/images/mobile-view.png)                                 |
+| Desktop | ![Desktop View](../ResumeGenie/static/images/desktop-view.png)                               |
 
 ---
 
@@ -60,7 +59,6 @@ Check out the live application here: link share here
 
 
 --- 
-
 ## 🚀 Installation
 
 Follow these steps to set up the application on your local machine:
