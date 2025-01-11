@@ -33,7 +33,7 @@
 ---
 
 ## 🌐 Video link
-Check out the live application here: link share here
+Check out the live application [here](https://youtu.be/kaYG7iiTsXQ)
 
 ---
 
