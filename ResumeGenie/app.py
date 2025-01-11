@@ -48,7 +48,6 @@ def resume():
         user_id = session["user_id"]
         # Fetch all resumes from the database
         resumes = db.execute("SELECT * FROM resumes WHERE user_id = ?", user_id)
-
         
         # Process JSON fields for proper rendering in the UI
         for resume in resumes:
