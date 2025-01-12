@@ -6,7 +6,7 @@
 ![Built with HTML](https://img.shields.io/badge/Built%20with-HTML-red)
 ![Built with CSS](https://img.shields.io/badge/Built%20with-CSS-blue)
 ![Bundler: Python](https://img.shields.io/badge/Bundler-python-magenta)
-![Bundler: SQL](https://img.shields.io/badge/Bundler-SQL-magenta)
+![Bundler: SQL](https://img.shields.io/badge/Bundler-SQL-black)
 ![Bundler: Flask](https://img.shields.io/badge/Bundler-Flask-magenta)
 ![Design Pattern: Functioanl](https://img.shields.io/badge/Design%20Pattern-Functional-blue)
 ![Deployment: Vercel](https://img.shields.io/badge/Deployment-Versal-lightgrey)
