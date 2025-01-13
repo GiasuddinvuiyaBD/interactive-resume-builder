@@ -1,6 +1,5 @@
 # 📝 "Resume Genie: An Interactive Resume Builder". 
 
-
 ![Status: Completed](https://img.shields.io/badge/Status-Completed-green)
 ![Built with JavaScript](https://img.shields.io/badge/Built%20with-JavaScript-yellow)
 ![Built with HTML](https://img.shields.io/badge/Built%20with-HTML-red)
