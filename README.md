@@ -13,7 +13,6 @@
 
 ---
 
-
 ## 📌 Overview
 
 **Resume Genie** is built to help users craft compelling resumes with minimal effort. Users can enter their personal and professional details, and the application automatically formats the information into a well-structured resume. The system supports multiple resumes per user, making it ideal for professionals with diverse career goals.
