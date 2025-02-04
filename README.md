@@ -57,7 +57,6 @@ Check out the live application [here](https://youtu.be/kaYG7iiTsXQ)
 - 📱 **Mobile-Friendly Design**: Fully responsive UI for all devices.
 - ⚠️ **Error Handling**: Friendly error messages and form validation.
 
-
 --- 
 ## 🚀 Installation
 
